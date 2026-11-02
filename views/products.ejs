@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cartivo Inventory | Products</title>
+    <%- include('partials/headcdns') %>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Navbar -->
+      <%- include('partials/header') %>
+
+      <!-- Page Heading -->
+      <section class="page-heading">
+        <div>
+          <span class="eyebrow">COLLECTION / 02</span>
+          <h1>Your products.</h1>
+          <p>
+            Manage your inventory, explore your data, and keep everything
+            organized.
+          </p>
+        </div>
+
+        <a href="/product/new" class="primary-btn"
+          ><span>＋</span> Add product</a
+        >
+      </section>
+
+      <!-- Stats -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-top">
+            <span>Total products</span>
+            <span>↗</span>
+          </div>
+          <h2>10</h2>
+          <p>Documents in collection</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span>Active products</span>
+            <span class="green-text">●</span>
+          </div>
+          <h2>9</h2>
+          <p>Currently available</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span>Low stock</span>
+            <span class="yellow-text">◉</span>
+          </div>
+          <h2>3</h2>
+          <p>5 units or fewer</p>
+        </div>
+      </section>
+
+      <!-- Products Table -->
+      <section class="glass-panel products-panel">
+        <div class="panel-header">
+          <div>
+            <h3>Product collection <span class="count-badge">10</span></h3>
+            <p>Explore, edit, and keep things in order.</p>
+          </div>
+
+          <span class="query-label">db.products.find()</span>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+          <input type="text" placeholder="Search name or SKU..." />
+
+          <select>
+            <option>All categories</option>
+            <option>Workspace</option>
+            <option>Electronics</option>
+            <option>Books</option>
+            <option>Lifestyle</option>
+          </select>
+
+          <select>
+            <option>All statuses</option>
+            <option>Active</option>
+            <option>Inactive</option>
+          </select>
+
+          <select>
+            <option>Newest first</option>
+            <option>Oldest first</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+          </select>
+
+          <button class="apply-btn">Apply</button>
+          <button class="reset-btn">Reset</button>
+        </div>
+
+        <!-- Table -->
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Price - USD</th>
+                <th>Stock</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>
+                  <div class="product-info">
+                    <span class="product-icon purple">S</span>
+                    <div>
+                      <strong>Studio pen set</strong><small>PEN-010</small>
+                    </div>
+                  </div>
+                </td>
+                <td>Workspace</td>
+                <td class="price">$15.75</td>
+                <td>42 units</td>
+                <td><span class="badge active-badge">● Active</span></td>
+                <td>
+                  <a href="#" class="edit-link">Edit</a
+                  ><a href="#" class="delete-link">Delete</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="product-info">
+                    <span class="product-icon green">P</span>
+                    <div>
+                      <strong>Pebble wireless mouse</strong
+                      ><small>MOUSE-009</small>
+                    </div>
+                  </div>
+                </td>
+                <td>Electronics</td>
+                <td class="price">$39.95</td>
+                <td>15 units</td>
+                <td><span class="badge active-badge">● Active</span></td>
+                <td>
+                  <a href="#" class="edit-link">Edit</a
+                  ><a href="#" class="delete-link">Delete</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="product-info">
+                    <span class="product-icon orange">L</span>
+                    <div>
+                      <strong>Learning Node.js journal</strong
+                      ><small>BOOK-008</small>
+                    </div>
+                  </div>
+                </td>
+                <td>Books</td>
+                <td class="price">$22.50</td>
+                <td>25 units</td>
+                <td><span class="badge active-badge">● Active</span></td>
+                <td>
+                  <a href="#" class="edit-link">Edit</a
+                  ><a href="#" class="delete-link">Delete</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="product-info">
+                    <span class="product-icon blue">W</span>
+                    <div>
+                      <strong>Weekend canvas tote</strong><small>BAG-007</small>
+                    </div>
+                  </div>
+                </td>
+                <td>Lifestyle</td>
+                <td class="price">$32.00</td>
+                <td><span class="warning-text">0</span> units</td>
+                <td><span class="badge inactive-badge">● Inactive</span></td>
+                <td>
+                  <a href="#" class="edit-link">Edit</a
+                  ><a href="#" class="delete-link">Delete</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="product-info">
+                    <span class="product-icon purple">C</span>
+                    <div>
+                      <strong>Contour monitor stand</strong
+                      ><small>STAND-006</small>
+                    </div>
+                  </div>
+                </td>
+                <td>Workspace</td>
+                <td class="price">$65.00</td>
+                <td>9 units</td>
+                <td><span class="badge active-badge">● Active</span></td>
+                <td>
+                  <a href="#" class="edit-link">Edit</a
+                  ><a href="#" class="delete-link">Delete</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="product-info">
+                    <span class="product-icon green">O</span>
+                    <div>
+                      <strong>Orbit wireless speaker</strong
+                      ><small>SPK-005</small>
+                    </div>
+                  </div>
+                </td>
+                <td>Electronics</td>
+                <td class="price">$89.00</td>
+                <td><span class="warning-text">3</span> units</td>
+                <td><span class="badge active-badge">● Active</span></td>
+                <td>
+                  <a href="#" class="edit-link">Edit</a
+                  ><a href="#" class="delete-link">Delete</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="product-info">
+                    <span class="product-icon orange">T</span>
+                    <div>
+                      <strong>The creative notebook</strong
+                      ><small>BOOK-004</small>
+                    </div>
+                  </div>
+                </td>
+                <td>Books</td>
+                <td class="price">$18.00</td>
+                <td>12 units</td>
+                <td><span class="badge active-badge">● Active</span></td>
+                <td>
+                  <a href="#" class="edit-link">Edit</a
+                  ><a href="#" class="delete-link">Delete</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="product-info">
+                    <span class="product-icon blue">E</span>
+                    <div>
+                      <strong>Everyday ceramic mug</strong
+                      ><small>MUG-003</small>
+                    </div>
+                  </div>
+                </td>
+                <td>Lifestyle</td>
+                <td class="price">$24.50</td>
+                <td>32 units</td>
+                <td><span class="badge active-badge">● Active</span></td>
+                <td>
+                  <a href="#" class="edit-link">Edit</a
+                  ><a href="#" class="delete-link">Delete</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="panel-footer">
+          <span>10 matching products · Page 1 of 2</span>
+
+          <div class="pagination">
+            <button disabled>←</button>
+            <button class="current-page">1</button>
+            <button>2</button>
+            <button>Next →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Playground Banner -->
+      <%- include('partials/bottomBanner') %>
+
+      <!-- Footer -->
+      <%- include('partials/footer') %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>404 - Page Not Found | Cartivo</title>
+    <%- include('partials/headcdns') %>
+  </head>
+
+  <body>
+    <%- include('partials/header') %>
+
+    <main class="error-page">
+      <div class="error-content">
+        <span class="error-code">404</span>
+
+        <div class="error-icon">✦</div>
+
+        <span class="eyebrow">ERROR / PAGE NOT FOUND</span>
+
+        <h1>Oops! Lost in the cartivo?</h1>
+
+        <p>
+          The page you're looking for doesn't exist, may have been moved, or the
+          URL is incorrect.
+        </p>
+
+        <div class="error-actions">
+          <a href="/" class="primary-btn"> ← Back to home </a>
+
+          <a href="/products" class="outline-btn"> Explore products </a>
+        </div>
+
+        <div class="error-hint">
+          <span class="status-dot"></span>
+          Don't worry, your inventory is safe.
+        </div>
+      </div>
+    </main>
+
+    <%- include('partials/footer') %> <%- include('partials/footercdns') %>
+  </body>
+</html>

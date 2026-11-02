@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>About | Cartivo</title>
+    <%- include('partials/headcdns') %>
+  </head>
+
+  <body>
+    <div class="app-container">
+      <%- include('partials/header') %>
+    </div>
+
+    <main>
+      <section class="home-hero">
+        <div class="hero-content">
+          <span class="eyebrow">ABOUT CARTIVO</span>
+
+          <h1>
+            Simplicity meets<br />
+            <span>inventory power.</span>
+          </h1>
+
+          <p>
+            Cartivo was built to eliminate the clutter and complexity of traditional inventory systems.
+            We bring real-time stock visibility, structured data management, and an aesthetic user
+            interface to your growing business operations.
+          </p>
+
+          <div class="hero-actions">
+            <a href="/products" class="primary-btn">View Inventory →</a>
+            <a href="/product/new" class="secondary-btn">＋ Add Product</a>
+          </div>
+
+          <div class="hero-note">
+            <span class="status-dot"></span>
+            Engineered with Node.js, Express, and MongoDB.
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="visual-glow"></div>
+
+          <div class="dashboard-preview">
+            <div class="preview-header">
+              <div>
+                <span class="preview-dot"></span>
+                <span>Platform Architecture</span>
+              </div>
+              <span class="preview-menu">•••</span>
+            </div>
+
+            <div class="preview-welcome">
+              <span>STACK SPECS</span>
+              <h3>Fast, Scalable<br />& Resilient.</h3>
+            </div>
+
+            <div class="preview-stats">
+              <div class="preview-stat">
+                <span>01</span>
+                <strong>Express 5</strong>
+              </div>
+              <div class="preview-stat">
+                <span>02</span>
+                <strong>Mongoose 9</strong>
+              </div>
+              <div class="preview-stat">
+                <span>03</span>
+                <strong>EJS Templates</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <%- include('partials/bottomBanner') %>
+    </main>
+
+    <%- include('partials/footer') %>
+    <%- include('partials/footercdns') %>
+  </body>
+</html>

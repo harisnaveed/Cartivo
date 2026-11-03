@@ -1,81 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>About | Cartivo</title>
+    <title>About | Cartivo Platform</title>
     <%- include('partials/headcdns') %>
   </head>
 
-  <body>
-    <div class="app-container">
+  <body class="relative overflow-x-hidden selection:bg-amber-100 selection:text-amber-900">
+
+    <!-- Ambient 3D Floating Clay Elements -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <div class="absolute -top-10 -left-12 w-32 h-24 sm:w-44 sm:h-32 clay-torus animate-float-slow opacity-80 rotate-12"></div>
+      <div class="absolute top-24 right-12 w-8 h-8 rounded-full bg-amber-400/50 blur-[2px] animate-float-gentle"></div>
+      <div class="absolute top-[45%] -left-16 w-36 h-36 clay-sphere-blue animate-float-drift opacity-75"></div>
+      <div class="absolute top-[40%] -right-10 w-24 h-40 clay-pill-amber animate-float-slow opacity-80 rotate-45"></div>
+    </div>
+
+    <!-- Navigation Header (Identical on all pages) -->
+    <div class="relative z-20">
       <%- include('partials/header') %>
     </div>
 
-    <main>
-      <section class="home-hero">
-        <div class="hero-content">
-          <span class="eyebrow">ABOUT CARTIVO</span>
+    <!-- Main Content -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-10 pb-16">
 
-          <h1>
+      <!-- Hero Section -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center pt-4 pb-16">
+        
+        <!-- Left: Copy & Value Proposition -->
+        <div class="lg:col-span-6 flex flex-col items-start">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/90 border border-slate-200/60 text-[11px] font-semibold text-slate-600 mb-4 tracking-wide uppercase">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+            ABOUT CARTIVO INVENTORY
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-4">
             Simplicity meets<br />
-            <span>inventory power.</span>
+            <span class="text-slate-800">inventory power.</span>
           </h1>
 
-          <p>
-            Cartivo was built to eliminate the clutter and complexity of traditional inventory systems.
-            We bring real-time stock visibility, structured data management, and an aesthetic user
-            interface to your growing business operations.
+          <p class="text-slate-500 text-sm sm:text-base leading-relaxed mb-6">
+            Cartivo was built to eliminate the clutter and complexity of traditional inventory systems. We bring real-time stock visibility, structured data management, and an aesthetic user interface to your business operations.
           </p>
 
-          <div class="hero-actions">
-            <a href="/products" class="primary-btn">View Inventory →</a>
-            <a href="/product/new" class="secondary-btn">＋ Add Product</a>
+          <div class="space-y-3 mb-8 w-full">
+            <div class="flex items-center gap-3 p-3 rounded-2xl bg-white border border-slate-100 shadow-sm">
+              <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs font-bold">✓</div>
+              <span class="text-xs font-semibold text-slate-700">Lightweight, modern Scandinavian UI architecture</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-2xl bg-white border border-slate-100 shadow-sm">
+              <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xs font-bold">✓</div>
+              <span class="text-xs font-semibold text-slate-700">Live MongoDB active stock filtering and real-time tracking</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-2xl bg-white border border-slate-100 shadow-sm">
+              <div class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-xs font-bold">✓</div>
+              <span class="text-xs font-semibold text-slate-700">Unified marketplace classifieds + back-office inventory hub</span>
+            </div>
           </div>
 
-          <div class="hero-note">
-            <span class="status-dot"></span>
-            Engineered with Node.js, Express, and MongoDB.
+          <div class="flex items-center gap-3">
+            <a href="/products" class="px-5 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-sm transition-all hover:-translate-y-0.5">
+              View Inventory →
+            </a>
+            <a href="/product/new" class="px-5 py-2.5 rounded-full bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold border border-slate-200/80 shadow-sm transition-all">
+              ＋ Add Product
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Modern Stack Specs Card -->
+        <div class="lg:col-span-6">
+          <div class="relative bg-white/90 backdrop-blur-md rounded-3xl border border-slate-200/80 p-8 shadow-[0_20px_50px_-15px_rgba(15,23,42,0.06)]">
+            
+            <div class="flex items-center justify-between pb-6 mb-6 border-b border-slate-100">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs font-bold tracking-wider text-slate-800 uppercase">PLATFORM ARCHITECTURE</span>
+              </div>
+              <span class="text-xs font-semibold text-slate-400">v1.0 Production Ready</span>
+            </div>
+
+            <div class="mb-6">
+              <span class="text-[11px] font-bold text-amber-500 uppercase tracking-wider block mb-1">ENGINEERING STACK</span>
+              <h3 class="text-2xl font-extrabold text-slate-900 tracking-tight leading-snug">
+                Fast, Scalable<br />& Highly Resilient.
+              </h3>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">01 / BACKEND</span>
+                <strong class="text-sm font-extrabold text-slate-900 block">Express 5</strong>
+                <span class="text-[11px] text-slate-500">Next-gen Node framework</span>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">02 / DATABASE</span>
+                <strong class="text-sm font-extrabold text-slate-900 block">Mongoose 9</strong>
+                <span class="text-[11px] text-slate-500">MongoDB ODM collection</span>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">03 / TEMPLATING</span>
+                <strong class="text-sm font-extrabold text-slate-900 block">EJS Engine</strong>
+                <span class="text-[11px] text-slate-500">Server-rendered components</span>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">04 / STYLING</span>
+                <strong class="text-sm font-extrabold text-slate-900 block">Tailwind CSS</strong>
+                <span class="text-[11px] text-slate-500">Scandinavian claymorphic system</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+              <span>Cartivo Workspace</span>
+              <span class="font-medium text-slate-600">Built for clarity & speed</span>
+            </div>
+
           </div>
         </div>
 
-        <div class="hero-visual">
-          <div class="visual-glow"></div>
-
-          <div class="dashboard-preview">
-            <div class="preview-header">
-              <div>
-                <span class="preview-dot"></span>
-                <span>Platform Architecture</span>
-              </div>
-              <span class="preview-menu">•••</span>
-            </div>
-
-            <div class="preview-welcome">
-              <span>STACK SPECS</span>
-              <h3>Fast, Scalable<br />& Resilient.</h3>
-            </div>
-
-            <div class="preview-stats">
-              <div class="preview-stat">
-                <span>01</span>
-                <strong>Express 5</strong>
-              </div>
-              <div class="preview-stat">
-                <span>02</span>
-                <strong>Mongoose 9</strong>
-              </div>
-              <div class="preview-stat">
-                <span>03</span>
-                <strong>EJS Templates</strong>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
 
+      <!-- Bottom Banner -->
       <%- include('partials/bottomBanner') %>
+
     </main>
 
+    <!-- Footer (Identical on all pages) -->
     <%- include('partials/footer') %>
     <%- include('partials/footercdns') %>
+
   </body>
 </html>

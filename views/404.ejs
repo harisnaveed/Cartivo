@@ -5,37 +5,64 @@
     <%- include('partials/headcdns') %>
   </head>
 
-  <body>
-    <%- include('partials/header') %>
+  <body class="relative overflow-x-hidden selection:bg-amber-100 selection:text-amber-900">
 
-    <main class="error-page">
-      <div class="error-content">
-        <span class="error-code">404</span>
+    <!-- Ambient 3D Floating Clay Elements -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <div class="absolute -top-10 -left-12 w-32 h-24 sm:w-44 sm:h-32 clay-torus animate-float-slow opacity-80 rotate-12"></div>
+      <div class="absolute top-24 right-12 w-8 h-8 rounded-full bg-amber-400/50 blur-[2px] animate-float-gentle"></div>
+      <div class="absolute top-[45%] -left-16 w-36 h-36 clay-sphere-blue animate-float-drift opacity-75"></div>
+      <div class="absolute top-[40%] -right-10 w-24 h-40 clay-pill-amber animate-float-slow opacity-80 rotate-45"></div>
+    </div>
 
-        <div class="error-icon">✦</div>
+    <!-- Navigation Header (Identical on all pages) -->
+    <div class="relative z-20">
+      <%- include('partials/header') %>
+    </div>
 
-        <span class="eyebrow">ERROR / PAGE NOT FOUND</span>
+    <!-- Main Content -->
+    <main class="relative z-10 max-w-2xl mx-auto px-4 py-20 text-center">
+      <div class="bg-white/85 backdrop-blur-md rounded-3xl border border-slate-200/80 p-8 sm:p-12 shadow-[0_20px_50px_-15px_rgba(15,23,42,0.06)]">
+        
+        <span class="text-6xl sm:text-7xl font-extrabold text-slate-900 tracking-tight block mb-2">404</span>
 
-        <h1>Oops! Lost in the cartivo?</h1>
+        <div class="w-12 h-12 mx-auto rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center text-xl font-bold mb-4">
+          ✦
+        </div>
 
-        <p>
-          The page you're looking for doesn't exist, may have been moved, or the
-          URL is incorrect.
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-[11px] font-semibold text-slate-600 mb-3 tracking-wide uppercase">
+          PAGE NOT FOUND
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-3">
+          Lost in the Cartivo?
+        </h1>
+
+        <p class="text-xs sm:text-sm text-slate-500 max-w-md mx-auto leading-relaxed mb-8">
+          The listing or page you're looking for doesn't exist, may have been moved, or the URL is incorrect.
         </p>
 
-        <div class="error-actions">
-          <a href="/" class="primary-btn"> ← Back to home </a>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <a href="/" class="px-6 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-md transition-all hover:-translate-y-0.5">
+            ← Back to Home
+          </a>
 
-          <a href="/products" class="outline-btn"> Explore products </a>
+          <a href="/shop" class="px-6 py-2.5 rounded-full bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold border border-slate-200 shadow-sm transition-all">
+            Browse Storefront
+          </a>
         </div>
 
-        <div class="error-hint">
-          <span class="status-dot"></span>
-          Don't worry, your inventory is safe.
+        <div class="mt-8 pt-6 border-t border-slate-100 text-[11px] text-slate-400 flex items-center justify-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          <span>Don't worry, your database and inventory remain safe.</span>
         </div>
+
       </div>
     </main>
 
-    <%- include('partials/footer') %> <%- include('partials/footercdns') %>
+    <!-- Footer (Identical on all pages) -->
+    <%- include('partials/footer') %>
+    <%- include('partials/footercdns') %>
+
   </body>
 </html>

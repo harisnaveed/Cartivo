@@ -1,27 +1,71 @@
-<nav class="navbar">
-  <a href="/" class="brand">
-    <span class="brand-icon">C.</span>
-    <span>Cartivo <small>/ inventory</small></span>
-  </a>
+<header class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-3">
+  <nav class="relative flex items-center justify-between px-5 sm:px-7 py-3 bg-white/85 backdrop-blur-md border border-slate-100 rounded-full shadow-[0_8px_30px_-5px_rgba(0,0,0,0.04)] transition-all duration-300 z-50">
+    
+    <!-- Brand Logo -->
+    <a href="/" class="brand flex items-center gap-2.5 group">
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-slate-900 to-slate-700 flex items-center justify-center text-white font-extrabold text-sm shadow-sm group-hover:scale-105 transition-transform">
+        <span class="text-amber-400">C</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900">Cartivo</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+      </div>
+    </a>
 
-  <div class="nav-links">
-    <a
-      href="/products"
-      class="<%= currentPath.startsWith('/products') ? 'active' : '' %>"
-      >Inventory
-    </a>
-    <a href="/shop" class="<%= currentPath === '/shop' ? 'active' : '' %>"
-      >Shop
-    </a>
-    <a href="/about" class="<%= currentPath === '/about' ? 'active' : '' %>"
-      >About
-    </a>
-    <a href="#">Query playground</a>
-    <a href="#">BSON guide</a>
-  </div>
+    <!-- Center Nav Links -->
+    <div class="nav-links hidden md:flex items-center gap-1 bg-slate-50/80 px-2.5 py-1 rounded-full border border-slate-100">
+      <a
+        href="/"
+        class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath === '/' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900' %>"
+      >
+        Home
+      </a>
+      <a
+        href="/shop"
+        class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath === '/shop' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900' %>"
+      >
+        Shop ▾
+      </a>
+      <a
+        href="/products"
+        class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath.startsWith('/products') ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900' %>"
+      >
+        Inventory
+      </a>
+      <a
+        href="/about"
+        class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath === '/about' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900' %>"
+      >
+        About
+      </a>
+      <a
+        href="/contact"
+        class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath === '/contact' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900' %>"
+      >
+        Contact
+      </a>
+    </div>
 
-  <div class="workspace-status">
-    <span class="status-dot"></span>
-    Learning workspace
-  </div>
-</nav>
+    <!-- Right Actions -->
+    <div class="flex items-center gap-2.5">
+      <!-- Cart / Search Icon Button -->
+      <a
+        href="/shop"
+        class="w-9 h-9 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors relative"
+        title="View Cart / Shop"
+      >
+        <i class="fa-solid fa-bag-shopping text-xs"></i>
+        <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-amber-500 ring-2 ring-white"></span>
+      </a>
+
+      <!-- Primary Dark Capsule Pill Button (+ Post Listing / + Add Product) -->
+      <a
+        href="/product/new"
+        class="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-[0_4px_14px_rgba(17,24,39,0.2)] hover:shadow-[0_6px_20px_rgba(17,24,39,0.3)] hover:-translate-y-0.5 transition-all duration-200"
+      >
+        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+        <span>+ Post Listing</span>
+      </a>
+    </div>
+  </nav>
+</header>

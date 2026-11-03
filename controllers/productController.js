@@ -134,3 +134,23 @@ export const getShopProducts = async (req, res) => {
     res.status(500).send("Unable to load shop products.");
   }
 };
+
+// GET: Home page with active products (fetches from database just like shop page)
+export const getHomeProducts = async (req, res) => {
+  try {
+    const products = await Product.find({
+      status: "active",
+    }).sort({ createdAt: -1 });
+
+    res.render("home", {
+      products: products || [],
+      currentPage: "home",
+    });
+  } catch (error) {
+    console.error("Home Route Error:", error.message);
+    res.render("home", {
+      products: [],
+      currentPage: "home",
+    });
+  }
+};

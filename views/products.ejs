@@ -1,188 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Cartivo Inventory | Products</title>
+    <title>Cartivo Inventory | Manage Products</title>
     <%- include('partials/headcdns') %>
   </head>
-  <body>
-    <div class="app-container">
-      <!-- Navbar -->
+
+  <body class="relative overflow-x-hidden selection:bg-amber-100 selection:text-amber-900">
+
+    <!-- Ambient 3D Floating Clay Elements -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <div class="absolute -top-10 -left-12 w-32 h-24 sm:w-44 sm:h-32 clay-torus animate-float-slow opacity-80 rotate-12"></div>
+      <div class="absolute top-24 right-12 w-8 h-8 rounded-full bg-amber-400/50 blur-[2px] animate-float-gentle"></div>
+      <div class="absolute top-[45%] -left-16 w-36 h-36 clay-sphere-blue animate-float-drift opacity-75"></div>
+      <div class="absolute top-[40%] -right-10 w-24 h-40 clay-pill-amber animate-float-slow opacity-80 rotate-45"></div>
+    </div>
+
+    <!-- Navigation Header (Identical on all pages) -->
+    <div class="relative z-20">
       <%- include('partials/header') %>
+    </div>
+
+    <!-- Main Content -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-10 pb-16">
 
       <!-- Page Heading -->
-      <section class="page-heading">
+      <section class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 sm:p-8 bg-white/80 backdrop-blur-md rounded-3xl border border-slate-200/80 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.03)] mb-8">
         <div>
-          <h1>Your products.</h1>
-          <p>
-            Manage your inventory, explore your data, and keep everything
-            organized.
-          </p>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/90 border border-slate-200/60 text-[11px] font-semibold text-slate-600 mb-2 tracking-wide uppercase">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+            BACK-OFFICE INVENTORY
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Your products.</h1>
+          <p class="text-slate-500 text-xs sm:text-sm mt-1">Manage your inventory, inspect product stock levels, and organize listings.</p>
         </div>
 
-        <a href="/product/new" class="primary-btn"
-          ><span>＋</span> Add product</a
-        >
+        <a href="/product/new" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-md transition-all hover:-translate-y-0.5 self-start sm:self-auto">
+          <span>＋</span> Add product
+        </a>
       </section>
 
-      <!-- Stats -->
-      <section class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-top">
-            <span>Total products</span>
-            <span>↗</span>
+      <!-- Stats Cards -->
+      <section class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+        <!-- Total Products -->
+        <div class="bg-white/85 backdrop-blur-md p-6 rounded-3xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+            <span>Total Products</span>
+            <span class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-xs">
+              <i class="fa-solid fa-boxes-stacked"></i>
+            </span>
           </div>
-          <h2><%= products.length %></h2>
-          <p>Documents in collection</p>
+          <div class="text-3xl font-extrabold text-slate-900 mb-1"><%= products.length %></div>
+          <p class="text-[11px] text-slate-400">Total documents in collection</p>
         </div>
 
-        <div class="stat-card">
-          <div class="stat-top">
-            <span>Active products</span>
-            <span class="green-text">●</span>
+        <!-- Active Products -->
+        <div class="bg-white/85 backdrop-blur-md p-6 rounded-3xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+            <span>Active Products</span>
+            <span class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs">
+              <i class="fa-solid fa-circle-check"></i>
+            </span>
           </div>
-          <h2><%= activeProducts %></h2>
-          <p>Currently available</p>
+          <div class="text-3xl font-extrabold text-emerald-600 mb-1"><%= activeProducts %></div>
+          <p class="text-[11px] text-slate-400">Currently live & available for sale</p>
         </div>
 
-        <div class="stat-card">
-          <div class="stat-top">
-            <span>Low stock</span>
-            <span class="yellow-text">◉</span>
+        <!-- Low Stock -->
+        <div class="bg-white/85 backdrop-blur-md p-6 rounded-3xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+            <span>Low Stock</span>
+            <span class="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-xs">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </span>
           </div>
-          <h2><%= lowStockProducts %></h2>
-          <p>5 units or fewer</p>
+          <div class="text-3xl font-extrabold text-amber-500 mb-1"><%= lowStockProducts %></div>
+          <p class="text-[11px] text-slate-400">5 units or fewer remaining</p>
         </div>
       </section>
 
-      <!-- Products Table -->
-      <section class="glass-panel products-panel">
-        <div class="panel-header">
+      <!-- Products Table Panel -->
+      <section class="bg-white/90 backdrop-blur-md rounded-3xl border border-slate-200/80 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.03)] overflow-hidden mb-8">
+        
+        <!-- Panel Header -->
+        <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3>Product collection <span class="count-badge"><%= products.length %></span></h3>
-            <p>Explore, edit, and keep things in order.</p>
+            <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <span>Product Collection</span>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700">
+                <%= products.length %>
+              </span>
+            </h2>
+            <p class="text-xs text-slate-400 mt-0.5">Explore, view details, and maintain your catalog.</p>
           </div>
 
-          <span class="query-label">All Products</span>
+          <span class="px-3 py-1 rounded-full bg-slate-50 border border-slate-200 text-[11px] font-semibold text-slate-600 self-start sm:self-auto">
+            All Inventory
+          </span>
         </div>
 
-        <!-- Filters -->
-        <div class="filter-bar">
-          <input type="text" placeholder="Search name or SKU..." />
-
-          <select>
-            <option>All categories</option>
-            <option>Workspace</option>
-            <option>Electronics</option>
-            <option>Books</option>
-            <option>Lifestyle</option>
-          </select>
-
-          <select>
-            <option>All statuses</option>
-            <option>Active</option>
-            <option>Inactive</option>
-          </select>
-
-          <select>
-            <option>Newest first</option>
-            <option>Oldest first</option>
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-          </select>
-
-          <button class="apply-btn">Apply</button>
-          <button class="reset-btn">Reset</button>
-        </div>
-
-        <!-- Table -->
-        <div class="table-wrapper">
-          <table>
+        <!-- Table Wrapper -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
             <thead>
-              <tr>
-                <th>Image</th>
-                <th>Product</th>
-                <th>Description</th>
-                <th>Price - USD</th>
-                <th>Category</th>
-                <th>Condition</th>
-                <th>Features</th>
-                <th>Stock</th>
-                <th>Status</th>
-                <th>Actions</th>
+              <tr class="bg-slate-50/80 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
+                <th class="py-3.5 px-4 pl-6">Preview</th>
+                <th class="py-3.5 px-4">Product Name</th>
+                <th class="py-3.5 px-4">Description</th>
+                <th class="py-3.5 px-4">Price</th>
+                <th class="py-3.5 px-4">Category</th>
+                <th class="py-3.5 px-4">Condition</th>
+                <th class="py-3.5 px-4">Stock</th>
+                <th class="py-3.5 px-4">Status</th>
+                <th class="py-3.5 px-4 pr-6 text-right">Actions</th>
               </tr>
             </thead>
 
-            <tbody>
+            <tbody class="divide-y divide-slate-100 text-xs text-slate-700">
               <% if (products.length > 0) { %>
                 <% products.forEach((product) => { %>
-                  <tr>
-                    <td>
-                      <div class="product-info">
+                  <tr class="hover:bg-slate-50/60 transition-colors">
+                    
+                    <!-- Thumbnail -->
+                    <td class="py-3.5 px-4 pl-6">
+                      <div class="w-12 h-12 rounded-xl bg-slate-100 overflow-hidden flex items-center justify-center border border-slate-200">
                         <% if (product.image) { %>
-                        <img
+                          <img
                             src="<%= product.image %>"
                             alt="<%= product.name %>"
-                            width="50"
-                        >
+                            class="w-full h-full object-cover"
+                          >
+                        <% } else { %>
+                          <i class="fa-solid fa-box-open text-slate-300"></i>
                         <% } %>
                       </div>
                     </td>
-                    <td><%= product.name %></td>
-                    <td><%= product.description %></td>
-                    <td class="price"><%= product.price %></td>
-                    <td><%= product.category %></td>
-                    <td><%= product.condition %></td>
-                    <td><%= product.features %></td>
-                    <td><%= product.stock %></td>
-                    <td><span class="badge <%= product.status %>-badge">● <%= product.status %></span></td>
-                    <td>
-                      <div class="product-actions">
-                        <a href="#" class="action-btn edit-btn""><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="/product/<%= product._id %>/view" class="action-btn view-btn"><i class="fa-solid fa-eye"></i></a>
-                        <form
-                            action="/product/<%= product._id %>/delete"
-                            method="POST"
-                             data-confirm="Are you sure you want to delete <%= product.name %> product?"
-                             onsubmit="return confirm(this.dataset.confirm)"
+
+                    <!-- Name -->
+                    <td class="py-3.5 px-4 font-bold text-slate-900 max-w-[160px] truncate">
+                      <%= product.name %>
+                    </td>
+
+                    <!-- Description -->
+                    <td class="py-3.5 px-4 text-slate-500 max-w-[200px] truncate">
+                      <%= product.description || '—' %>
+                    </td>
+
+                    <!-- Price -->
+                    <td class="py-3.5 px-4 font-extrabold text-slate-900">
+                      $<%= Number(product.price).toFixed(2) %>
+                    </td>
+
+                    <!-- Category -->
+                    <td class="py-3.5 px-4">
+                      <span class="inline-block px-2.5 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-700">
+                        <%= product.category || 'General' %>
+                      </span>
+                    </td>
+
+                    <!-- Condition -->
+                    <td class="py-3.5 px-4 text-slate-500 capitalize">
+                      <%= product.condition || 'New' %>
+                    </td>
+
+                    <!-- Stock -->
+                    <td class="py-3.5 px-4">
+                      <span class="font-bold <%= product.stock < 5 ? 'text-amber-600' : 'text-slate-800' %>">
+                        <%= product.stock %>
+                      </span>
+                    </td>
+
+                    <!-- Status Badge -->
+                    <td class="py-3.5 px-4">
+                      <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold capitalize <%= product.status === 'active' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-600' %>">
+                        <span class="w-1.5 h-1.5 rounded-full <%= product.status === 'active' ? 'bg-emerald-500' : 'bg-slate-400' %>"></span>
+                        <%= product.status %>
+                      </span>
+                    </td>
+
+                    <!-- Action Buttons -->
+                    <td class="py-3.5 px-4 pr-6 text-right">
+                      <div class="flex items-center justify-end gap-2">
+                        <!-- View -->
+                        <a 
+                          href="/product/<%= product._id %>/view" 
+                          class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 flex items-center justify-center transition-colors"
+                          title="View Details"
                         >
-                            <button type="submit" class="action-btn delete-btn">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
+                          <i class="fa-solid fa-eye text-xs"></i>
+                        </a>
+
+                        <!-- Delete Form -->
+                        <form
+                          action="/product/<%= product._id %>/delete"
+                          method="POST"
+                          data-confirm="Are you sure you want to delete <%= product.name %>?"
+                          onsubmit="return confirm(this.dataset.confirm)"
+                          class="inline"
+                        >
+                          <button 
+                            type="submit" 
+                            class="w-8 h-8 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 flex items-center justify-center transition-colors"
+                            title="Delete Product"
+                          >
+                            <i class="fa-solid fa-trash text-xs"></i>
+                          </button>
                         </form>
                       </div>
                     </td>
+
                   </tr>
                 <% }); %>
               <% } else { %>
-
-                  <tr>
-                    <td><p>No products found!</p></td>
-                  </tr>
-
+                <tr>
+                  <td colspan="9" class="p-12 text-center text-slate-400">
+                    <i class="fa-solid fa-box-open text-3xl mb-2 block"></i>
+                    <span>No products found in inventory.</span>
+                  </td>
+                </tr>
               <% } %>
-            
             </tbody>
           </table>
         </div>
 
-        <!-- Pagination -->
-        <div class="panel-footer">
-          <span>10 matching products · Page 1 of 2</span>
-
-          <div class="pagination">
-            <button disabled>←</button>
-            <button class="current-page">1</button>
-            <button>2</button>
-            <button>Next →</button>
-          </div>
+        <!-- Panel Footer -->
+        <div class="p-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+          <span><%= products.length %> total records</span>
+          <a href="/shop" class="text-xs font-semibold text-slate-700 hover:text-blue-600 transition-colors">
+            View in Storefront →
+          </a>
         </div>
+
       </section>
 
       <!-- Playground Banner -->
       <%- include('partials/bottomBanner') %>
 
-      <!-- Footer -->
-      <%- include('partials/footer') %>
-    </div>
+    </main>
+
+    <!-- Footer (Identical on all pages) -->
+    <%- include('partials/footer') %>
+    <%- include('partials/footercdns') %>
+
   </body>
 </html>

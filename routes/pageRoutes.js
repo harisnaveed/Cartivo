@@ -5,32 +5,38 @@ import {
   getProductDetails,
   deleteProduct,
   getShopProducts,
+  getHomeProducts,
 } from "../controllers/productController.js";
 import upload from "../config/multer.js";
 
 const router = express.Router();
 
 // Home page
-router.get("/", (req, res) => {
-  res.render("home");
-});
+router.get("/", getHomeProducts);
 
 // About page
 router.get("/about", (req, res) => {
   res.render("about");
 });
 
-// // Products page
-// router.get("/products", (req, res) => {
-//   res.render("products");
-// });
+// Contact page (GET)
+router.get("/contact", (req, res) => {
+  res.render("contact", {
+    success: req.query.success === "true",
+  });
+});
+
+// Contact form submission (POST)
+router.post("/contact", (req, res) => {
+  const { name, email, subject, message } = req.body;
+  console.log("Contact submission received:", { name, email, subject, message });
+  res.redirect("/contact?success=true");
+});
 
 // Products page
 router.get("/products", getProducts);
 
 // Create product
-// router.post("/create-product", createProduct); // for simple form textual not files in form
-
 router.post("/create-product", upload.single("product_image"), createProduct);
 
 // Add Product Page

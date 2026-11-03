@@ -12,6 +12,7 @@ public/uploads/*
 
 # Backup files
 *.bak
+*.zip
 
 # Logs
 logs/

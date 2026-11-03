@@ -5,7 +5,14 @@
   </a>
 
   <div class="nav-links">
-    <a href="/products" class="active">Inventory</a>
+    <a
+      href="/products"
+      class="<%= currentPath.startsWith('/products') ? 'active' : '' %>"
+      >Inventory
+    </a>
+    <a href="/about" class="<%= currentPath === '/about' ? 'active' : '' %>"
+      >About
+    </a>
     <a href="#">Query playground</a>
     <a href="#">BSON guide</a>
   </div>

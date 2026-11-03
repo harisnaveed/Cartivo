@@ -136,8 +136,20 @@
                     <td><%= product.stock %></td>
                     <td><span class="badge <%= product.status %>-badge">● <%= product.status %></span></td>
                     <td>
-                      <a href="#" class="edit-link">Edit</a
-                      ><a href="#" class="delete-link">Delete</a>
+                      <div class="product-actions">
+                        <a href="#" class="action-btn edit-btn""><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="/product/<%= product._id %>/view" class="action-btn view-btn"><i class="fa-solid fa-eye"></i></a>
+                        <form
+                            action="/product/<%= product._id %>/delete"
+                            method="POST"
+                             data-confirm="Are you sure you want to delete <%= product.name %> product?"
+                             onsubmit="return confirm(this.dataset.confirm)"
+                        >
+                            <button type="submit" class="action-btn delete-btn">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                      </div>
                     </td>
                   </tr>
                 <% }); %>

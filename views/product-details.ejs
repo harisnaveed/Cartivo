@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= product.name %> | Cartivo</title>
+    <%- include('partials/headcdns') %>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="app-container">
+        <%- include('partials/header') %>
+    </div>
+
+    <main class="product-details-page">
+
+        <!-- Breadcrumb -->
+        <div class="product-breadcrumb">
+            <a href="/">Home</a>
+            <span>/</span>
+            <a href="/products">Products</a>
+            <span>/</span>
+            <span><%= product.name %></span>
+        </div>
+
+        <!-- Product Details -->
+        <section class="product-details-layout">
+
+            <!-- Left: Product Image -->
+            <div class="product-details-visual">
+
+                <div class="product-image-glow"></div>
+
+                <div class="product-image-card">
+
+                    <% if (product.image) { %>
+
+                        <img
+                            src="<%= product.image %>"
+                            alt="<%= product.name %>"
+                            class="product-main-image"
+                        >
+
+                    <% } else { %>
+
+                        <div class="product-image-placeholder">
+                            <span>NO IMAGE</span>
+                        </div>
+
+                    <% } %>
+
+                    <span class="product-image-label">
+                        PRODUCT PREVIEW
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Right: Product Information -->
+            <div class="product-details-content">
+
+                <span class="eyebrow">PRODUCT DETAILS</span>
+
+                <h1>
+                    <%= product.name %>
+                </h1>
+
+                <div class="product-detail-badges">
+
+                    <span class="category-badge">
+                        <%= product.category %>
+                    </span>
+
+                    <span class="status-badge <%= product.status === 'active' ? 'active' : 'inactive' %>">
+                        <%= product.status %>
+                    </span>
+
+                </div>
+
+                <div class="product-detail-price">
+                    $<%= Number(product.price).toFixed(2) %>
+                </div>
+
+                <p class="product-detail-description">
+                    <%= product.description || "No product description available." %>
+                </p>
+
+
+                <!-- Inventory Information -->
+                <div class="product-information-grid">
+
+                    <div class="information-card">
+                        <span>AVAILABLE STOCK</span>
+                        <strong><%= product.stock %></strong>
+                    </div>
+
+                    <div class="information-card">
+                        <span>STOCK STATUS</span>
+
+                        <% if (product.stock < 5) { %>
+
+                            <strong class="low-stock-text">
+                                Low Stock
+                            </strong>
+
+                        <% } else { %>
+
+                            <strong class="in-stock-text">
+                                In Stock
+                            </strong>
+
+                        <% } %>
+                    </div>
+
+                </div>
+
+
+                <!-- Product Dates -->
+                <div class="product-meta">
+
+                    <div>
+                        <span>Created</span>
+                        <strong>
+                            <%= new Date(product.createdAt).toLocaleDateString() %>
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Last Updated</span>
+                        <strong>
+                            <%= new Date(product.updatedAt).toLocaleDateString() %>
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <!-- Actions -->
+                <div class="product-detail-actions">
+
+                    <a href="/products" class="primary-btn">
+                        ← Back to Products
+                    </a>
+
+                    <a href="/product/new" class="secondary-btn">
+                        + Add Another Product
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <%- include('partials/footer') %>
+    <%- include('partials/footercdns') %>
+
+</body>
+</html>

@@ -64,3 +64,56 @@ export const createProduct = async (req, res) => {
     res.status(500).send("Error creating product: ", error.message);
   }
 };
+
+// GET: View single product details
+export const getProductDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Validate MongoDB ID
+    if (!Product.db.base.Types.ObjectId.isValid(id)) {
+      return res.status(400).send("Invalid Product ID");
+    }
+
+    // Find product by ID
+    const product = await Product.findById(id);
+
+    if (!product) {
+      return res.status(404).render("404");
+    }
+
+    // Render product details page
+    res.render("product-details", {
+      product,
+    });
+  } catch (error) {
+    console.error("Product Details Error:", error.message);
+    res.status(500).send("Error fetching product details");
+  }
+};
+
+// DELETE: Delete product
+export const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Validate MongoDB ID
+    if (!Product.db.base.Types.ObjectId.isValid(id)) {
+      return res.status(400).send("Invalid Product ID");
+    }
+
+    // Find and delete product
+    const deletedProduct = await Product.findByIdAndDelete(id);
+
+    if (!deletedProduct) {
+      return res.status(404).send("Product not found");
+    }
+
+    console.log("Product Deleted:", deletedProduct.name);
+
+    res.redirect("/products");
+  } catch (error) {
+    console.error("Delete Product Error:", error.message);
+    res.status(500).send("Error deleting product");
+  }
+};

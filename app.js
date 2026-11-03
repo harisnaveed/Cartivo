@@ -21,6 +21,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Get current URL for navigation
+// res.locals makes the variable available to all EJS templates rendered during that request.
+app.use((req, res, next) => {
+  res.locals.currentPath = req.path;
+  next();
+});
+
 // Routes
 import pageRoutes from "./routes/pageRoutes.js";
 

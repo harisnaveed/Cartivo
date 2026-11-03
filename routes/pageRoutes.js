@@ -2,6 +2,8 @@ import express from "express";
 import {
   getProducts,
   createProduct,
+  getProductDetails,
+  deleteProduct,
 } from "../controllers/productController.js";
 import upload from "../config/multer.js";
 
@@ -34,6 +36,12 @@ router.post("/create-product", upload.single("product_image"), createProduct);
 router.get("/product/new", (req, res) => {
   res.render("add-product");
 });
+
+// Single product details - keep after specific product routes
+router.get("/product/:id/view", getProductDetails);
+
+// delete product
+router.post("/product/:id/delete", deleteProduct);
 
 // 404 - Always last
 router.use((req, res) => {

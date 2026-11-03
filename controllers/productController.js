@@ -117,3 +117,20 @@ export const deleteProduct = async (req, res) => {
     res.status(500).send("Error deleting product");
   }
 };
+
+// Show all active products in Shop
+export const getShopProducts = async (req, res) => {
+  try {
+    const products = await Product.find({
+      status: "active",
+    }).sort({ createdAt: -1 });
+
+    res.render("shop", {
+      products,
+      currentPage: "shop",
+    });
+  } catch (error) {
+    console.error("Shop Error:", error.message);
+    res.status(500).send("Unable to load shop products.");
+  }
+};

@@ -4,6 +4,7 @@ import {
   createProduct,
   getProductDetails,
   deleteProduct,
+  getShopProducts,
 } from "../controllers/productController.js";
 import upload from "../config/multer.js";
 
@@ -42,6 +43,9 @@ router.get("/product/:id/view", getProductDetails);
 
 // delete product
 router.post("/product/:id/delete", deleteProduct);
+
+// all active products for shop page
+router.get("/shop", getShopProducts);
 
 // 404 - Always last
 router.use((req, res) => {

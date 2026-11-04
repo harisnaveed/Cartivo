@@ -7,6 +7,7 @@ import {
   getShopProducts,
   getHomeProducts,
 } from "../controllers/productController.js";
+import { getContact, submitContact } from "../controllers/contactController.js";
 import upload from "../config/multer.js";
 
 const router = express.Router();
@@ -20,18 +21,10 @@ router.get("/about", (req, res) => {
 });
 
 // Contact page (GET)
-router.get("/contact", (req, res) => {
-  res.render("contact", {
-    success: req.query.success === "true",
-  });
-});
+router.get("/contact", getContact);
 
 // Contact form submission (POST)
-router.post("/contact", (req, res) => {
-  const { name, email, subject, message } = req.body;
-  console.log("Contact submission received:", { name, email, subject, message });
-  res.redirect("/contact?success=true");
-});
+router.post("/contact", submitContact);
 
 // Products page
 router.get("/products", getProducts);

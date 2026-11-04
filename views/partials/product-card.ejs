@@ -1,0 +1,99 @@
+<article class="shop-product-card cartivo-card p-3 flex flex-col justify-between group">
+
+  <!-- Product Image & Quick View Trigger -->
+  <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-slate-100 mb-3 flex items-center justify-center">
+
+    <a href="/product/<%= product._id %>/view">
+      <% if (product.image) { %>
+        <img
+          src="<%= product.image %>"
+          alt="<%= product.name %>"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+      <% } else { %>
+        <div class="w-full h-full flex flex-col items-center justify-center text-slate-300 bg-slate-50">
+          <i class="fa-solid fa-box-open text-3xl mb-1 text-slate-300"></i>
+          <span class="text-[10px] font-semibold text-slate-400">No Image</span>
+        </div>
+      <% } %>
+    </a>
+
+    <!-- Category Badge -->
+    <span class="shop-category absolute top-2.5 left-2.5 px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase bg-white/90 backdrop-blur-md text-slate-700 rounded-lg shadow-sm">
+      <%= product.category || 'General' %>
+    </span>
+
+    <!-- Quick View Button -->
+    <button
+      type="button"
+      class="quick-view-btn absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md text-slate-700 hover:text-slate-900 hover:bg-white flex items-center justify-center shadow-sm transition-all"
+      title="Quick View"
+      data-id="<%= product._id %>"
+      data-name="<%= product.name %>"
+      data-price="<%= product.price %>"
+      data-category="<%= product.category %>"
+      data-description="<%= product.description || '' %>"
+      data-image="<%= product.image || '' %>"
+      data-stock="<%= product.stock %>"
+    >
+      <i class="fa-solid fa-eye text-xs"></i>
+    </button>
+
+  </div>
+
+  <!-- Product Info -->
+  <div class="shop-product-info px-1 flex flex-col flex-grow">
+
+    <a href="/product/<%= product._id %>/view">
+      <h3 class="shop-product-name text-slate-900 font-bold text-sm leading-snug line-clamp-1 group-hover:text-blue-600 transition-colors">
+        <%= product.name %>
+      </h3>
+    </a>
+
+    <p class="shop-product-description text-xs text-slate-400 mt-1 mb-3 line-clamp-2 leading-relaxed">
+      <%= product.description || 'Verified product from Cartivo inventory.' %>
+    </p>
+
+    <p class="text-xs text-slate-400 mt-1 mb-3 flex items-center gap-1.5">
+      <i class="fa-solid fa-tag text-[10px] text-slate-300"></i>
+      <span><%= product.condition || 'Verified Stock' %></span>
+      <span class="text-slate-200">·</span>
+      <span><%= product.stock %> items</span>
+    </p>
+
+    <!-- Price & Add to Cart -->
+    <div class="shop-product-bottom mt-auto pt-2.5 border-t border-slate-100 flex items-center justify-between">
+      <div class="shop-price">
+        <span class="text-[10px] font-medium text-slate-400 block -mb-0.5">Price</span>
+        <strong class="text-base font-extrabold text-slate-900">$<%= Number(product.price || 0).toFixed(2) %></strong>
+      </div>
+
+      <button
+        type="button"
+        class="add-cart-btn px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 disabled:bg-slate-300 text-white text-xs font-semibold shadow-sm transition-all inline-flex items-center gap-1.5"
+        data-id="<%= product._id %>"
+        data-name="<%= product.name %>"
+        data-price="<%= product.price %>"
+        data-image="<%= product.image || '' %>"
+        <%= product.stock <= 0 ? 'disabled' : '' %>
+      >
+        <i class="fa-solid fa-cart-plus text-[10px]"></i>
+        <span><%= product.stock > 0 ? 'Add to Cart' : 'Sold Out' %></span>
+      </button>
+    </div>
+
+    <!-- Stock Status Indicator -->
+    <div class="mt-2.5 pt-2 flex items-center justify-between text-xs text-slate-400 border-t border-slate-50">
+      <span class="flex items-center gap-1.5 text-[11px]">
+        <span class="w-1.5 h-1.5 rounded-full <%= product.stock > 0 ? 'bg-emerald-500' : 'bg-rose-500' %>"></span>
+        <%= product.stock > 0 ? product.stock + ' in stock' : 'Out of Stock' %>
+      </span>
+      <a href="/product/<%= product._id %>/view" class="text-slate-600 font-semibold hover:text-blue-600 transition-colors text-[11px]">
+        Details →
+      </a>
+    </div>
+
+  </div>
+
+</article>
+

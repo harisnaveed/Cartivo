@@ -368,11 +368,12 @@ body {
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 9999;
 }
 
-.quick-view-modal.active {
-  display: flex;
+.quick-view-modal.active,
+.quick-view-modal.open {
+  display: flex !important;
 }
 
 .quick-view-overlay {

@@ -1,0 +1,180 @@
+<!-- Main Form & Map Section (2 Columns) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12 scroll-mt-24" id="contact">
+  
+  <!-- Left: Contact Form Card -->
+  <div class="lg:col-span-7 bg-white/90 backdrop-blur-md rounded-3xl border border-slate-200/80 p-6 sm:p-10 shadow-[0_15px_40px_-10px_rgba(15,23,42,0.04)]">
+    
+    <div class="mb-6 pb-4 border-b border-slate-100 flex items-center justify-between">
+      <div>
+        <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Send a message</h2>
+        <p class="text-xs text-slate-400 mt-0.5">We typically reply within a couple of hours.</p>
+      </div>
+      <span class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xs font-bold">
+        <i class="fa-solid fa-paper-plane"></i>
+      </span>
+    </div>
+
+    <!-- Success Alert Notification -->
+    <% if (typeof success !== 'undefined' && success) { %>
+      <div class="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-start gap-3 text-emerald-800 animate-fadeIn">
+        <div class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+          ✓
+        </div>
+        <div class="text-xs leading-relaxed">
+          <strong class="font-bold block text-sm">Message received successfully!</strong>
+          <span>Thank you for reaching out. One of our marketplace team members will contact you shortly.</span>
+        </div>
+      </div>
+    <% } %>
+
+    <form action="/contact" method="POST" class="space-y-4">
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Name -->
+        <div>
+          <label for="name" class="block text-xs font-bold text-slate-700 mb-1.5">
+            Your Full Name <span class="text-rose-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="e.g. Sarah Jenkins"
+            required
+            class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all"
+          />
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-xs font-bold text-slate-700 mb-1.5">
+            Email Address <span class="text-rose-500">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="name@example.com"
+            required
+            class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all"
+          />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Phone -->
+        <div>
+          <label for="phone" class="block text-xs font-bold text-slate-700 mb-1.5">
+            Phone Number
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="+1 (555) 000-0000"
+            class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all"
+          />
+        </div>
+
+        <!-- Subject / Topic -->
+        <div>
+          <label for="subject" class="block text-xs font-bold text-slate-700 mb-1.5">
+            Inquiry Topic
+          </label>
+          <select
+            id="subject"
+            name="subject"
+            class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all cursor-pointer"
+          >
+            <option value="General Inquiry">General Marketplace Inquiry</option>
+            <option value="Inventory Support">Inventory Management Support</option>
+            <option value="Listing Verification">Product Listing Verification</option>
+            <option value="Partnership">Business / Wholesale Partnership</option>
+            <option value="Bug Report">Technical Issue / Bug Report</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Message -->
+      <div>
+        <label for="message" class="block text-xs font-bold text-slate-700 mb-1.5">
+          Message <span class="text-rose-500">*</span>
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          placeholder="How can we assist you today? Please share as much detail as possible..."
+          required
+          class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all resize-none"
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-md transition-all hover:-translate-y-0.5"
+      >
+        <span>Send Message</span>
+        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+      </button>
+    </form>
+
+  </div>
+
+  <!-- Right: Interactive Map & Location Card -->
+  <div class="lg:col-span-5 space-y-6">
+    
+    <!-- Styled Google Maps Card -->
+    <div class="bg-white/90 backdrop-blur-md rounded-3xl border border-slate-200/80 p-3 shadow-[0_15px_40px_-10px_rgba(15,23,42,0.04)] overflow-hidden">
+      <div class="relative w-full h-[320px] rounded-2xl overflow-hidden bg-slate-100">
+        <iframe
+          title="Cartivo Headquarters Map"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0863951594247!2d-122.39997192336336!3d37.79155701140645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085806283b4b5dd%3A0x88981dfc33324f46!2sMarket%20St%2C%20San%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus"
+          class="w-full h-full border-0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+
+        <!-- Map Overlay Location Pill -->
+        <div class="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/80 shadow-md flex items-center gap-2 text-[11px] font-bold text-slate-800">
+          <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+          <span>Cartivo HQ · Market St, SF</span>
+        </div>
+      </div>
+
+      <div class="p-4 flex items-center justify-between text-xs text-slate-500">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-diamond-turn-right text-slate-400"></i>
+          <span>Convenient transit access</span>
+        </div>
+        <a 
+          href="https://maps.google.com/?q=Market+St,+San+Francisco,+CA" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="text-xs font-bold text-slate-900 hover:text-blue-600 transition-colors"
+        >
+          Open in Maps ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Directions & Appointments Card -->
+    <div class="bg-white/90 backdrop-blur-md rounded-3xl border border-slate-200/80 p-6 shadow-sm">
+      <h3 class="text-sm font-bold text-slate-900 mb-2 flex items-center gap-2">
+        <i class="fa-solid fa-handshake text-amber-500"></i>
+        <span>Visiting Our Office?</span>
+      </h3>
+      <p class="text-xs text-slate-500 leading-relaxed mb-4">
+        We welcome in-person meetings for enterprise inventory onboarding, vendor partnerships, and investor queries. Please schedule 24 hours in advance.
+      </p>
+      <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        <span>Front Desk: Lobby Reception, Floor 4</span>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+

@@ -145,12 +145,14 @@ export const getHomeProducts = async (req, res) => {
     res.render("home", {
       products: products || [],
       currentPage: "home",
+      success: req.query.success === "true",
     });
   } catch (error) {
     console.error("Home Route Error:", error.message);
     res.render("home", {
       products: [],
       currentPage: "home",
+      success: false,
     });
   }
 };

@@ -28,3 +28,6 @@ Thumbs.db
 # Editor files
 .vscode/
 .idea/
+
+#data folder
+data/leads.json

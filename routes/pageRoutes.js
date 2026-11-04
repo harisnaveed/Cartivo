@@ -38,7 +38,7 @@ router.post("/create-product", upload.single("product_image"), createProduct);
 router.get("/product/new", getAddProductPage);
 
 // Single product details - keep after specific product routes
-router.get("/product/:id/view", getProductDetails);
+router.get("/product/:slug/view", getProductDetails);
 
 // delete product
 router.post("/product/:id/delete", deleteProduct);

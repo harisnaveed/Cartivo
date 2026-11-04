@@ -79,7 +79,7 @@
               <select name="category" class="text-xs font-semibold text-slate-600 bg-transparent focus:outline-none cursor-pointer pr-1">
                 <option value="">Categories</option>
                 <% categories.forEach(category => { %>
-                  <option value="<%= category.name %>"><%= category.name %></option>
+                  <option value="<%= category.slug %>"><%= category.name %></option>
                 <% }) %>
               </select>
             </div>
@@ -184,7 +184,7 @@
             <% if (typeof categories !== 'undefined' && categories && categories.length > 0) { %>
               <% categories.forEach(category => { %>
                 <a
-                  href="/shop?category=<%= encodeURIComponent(category.name) %>"
+                  href="/shop?category=<%= encodeURIComponent(category.slug) %>"
                   class="group flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-100 hover:border-slate-300 hover:shadow-md hover:-translate-y-1 transition-all flex-shrink-0 w-[125px] sm:w-[145px] lg:w-[155px] text-center"
                 >
                   <div class="w-11 h-11 rounded-xl bg-slate-50 group-hover:bg-blue-50 text-slate-600 group-hover:text-blue-600 flex items-center justify-center text-base mb-2 transition-colors">

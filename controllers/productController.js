@@ -40,6 +40,7 @@ export const createProduct = async (req, res) => {
   try {
     const {
       name,
+      slug,
       description,
       price,
       category_id,
@@ -54,6 +55,7 @@ export const createProduct = async (req, res) => {
 
     const newProduct = await Product.create({
       name,
+      slug,
       description,
       image,
       price,
@@ -74,17 +76,16 @@ export const createProduct = async (req, res) => {
 };
 
 // GET: View single product details
+
 export const getProductDetails = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { slug } = req.params;
 
-    // Validate MongoDB ID
-    if (!Product.db.base.Types.ObjectId.isValid(id)) {
-      return res.status(400).send("Invalid Product ID");
-    }
-
-    // Find product by ID
-    const product = await Product.findById(id).populate("category_id");
+    // Find product using slug
+    const product = await Product.findOne({
+      slug: slug,
+      status: "active",
+    }).populate("category_id");
 
     if (!product) {
       return res.status(404).render("404");
@@ -101,17 +102,13 @@ export const getProductDetails = async (req, res) => {
 };
 
 // DELETE: Delete product and its image
+
 export const deleteProduct = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { slug } = req.params;
 
-    // Validate MongoDB ID
-    if (!Product.db.base.Types.ObjectId.isValid(id)) {
-      return res.status(400).send("Invalid Product ID");
-    }
-
-    // Find product first
-    const product = await Product.findById(id);
+    // Find product using slug
+    const product = await Product.findOne({ slug });
 
     if (!product) {
       return res.status(404).send("Product not found");
@@ -135,7 +132,7 @@ export const deleteProduct = async (req, res) => {
     }
 
     // Delete product from MongoDB
-    await Product.findByIdAndDelete(id);
+    await Product.findOneAndDelete({ slug });
 
     console.log("Product Deleted:", product.name);
 
@@ -147,15 +144,56 @@ export const deleteProduct = async (req, res) => {
 };
 
 // Show all active products in Shop
+
 export const getShopProducts = async (req, res) => {
   try {
-    const products = await Product.find({
+    // Get query parameters
+    const { search, category } = req.query;
+
+    // Base filter: only active products
+    const filter = {
       status: "active",
-    }).sort({ createdAt: -1 });
+    };
+
+    // Search by product name
+    if (search && search.trim()) {
+      filter.name = {
+        $regex: search.trim(), //	Search using a regular expression
+        $options: "i", //Case-insensitive search
+      };
+    }
+
+    // Filter by category slug
+    if (category && category.trim()) {
+      const categoryData = await Category.findOne({
+        slug: category.trim(),
+        status: "active",
+      });
+
+      if (!categoryData) {
+        return res.render("shop", {
+          products: [],
+          currentPage: "shop",
+          search,
+          selectedCategory: category,
+        });
+      }
+
+      filter.category_id = categoryData._id;
+    }
+
+    // Fetch products
+    // 1 => Ascending (oldest first)
+    // -1 => Descending (newest first)
+    const products = await Product.find(filter)
+      .populate("category_id")
+      .sort({ createdAt: -1 });
 
     res.render("shop", {
       products,
       currentPage: "shop",
+      search: search || "",
+      selectedCategory: category || "",
     });
   } catch (error) {
     console.error("Shop Error:", error.message);

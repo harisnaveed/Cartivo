@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import slugify from "slugify";
 
 // Product Schema
 const productSchema = new mongoose.Schema(
@@ -6,6 +7,14 @@ const productSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
+      trim: true,
+    },
+
+    slug: {
+      type: String,
+      unique: true,
+      lowercase: true,
+      trim: true,
     },
 
     description: {
@@ -54,6 +63,17 @@ const productSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
+
+// Automatically generate slug from product name
+productSchema.pre("validate", function () {
+  if (this.isModified("name") && this.name) {
+    this.slug = slugify(this.name, {
+      lower: true,
+      strict: true,
+      trim: true,
+    });
+  }
+});
 
 // Create Product Model
 const Product = mongoose.model("Product", productSchema);

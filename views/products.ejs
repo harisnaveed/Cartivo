@@ -191,7 +191,7 @@
 
                         <!-- Delete Form -->
                         <form
-                          action="/product/<%= product._id %>/delete"
+                          action="/product/<%= product.slug %>/delete"
                           method="POST"
                           data-confirm="Are you sure you want to delete <%= product.name %>?"
                           onsubmit="return confirm(this.dataset.confirm)"

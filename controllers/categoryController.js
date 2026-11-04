@@ -44,10 +44,11 @@ export const getCategoriesAPI = async (req, res) => {
 // POST: Insert a new category
 export const createCategory = async (req, res) => {
   try {
-    const { name, icon, status } = req.body;
+    const { name, slug, icon, status } = req.body;
 
     const newCategory = await Category.create({
       name,
+      slug,
       icon,
       status,
     });

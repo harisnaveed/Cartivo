@@ -3,7 +3,7 @@
   <!-- Product Image & Quick View Trigger -->
   <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-slate-100 mb-3 flex items-center justify-center">
 
-    <a href="/product/<%= product._id %>/view">
+    <a href="/product/<%= product.slug %>/view">
       <% if (product.image) { %>
         <img
           src="<%= product.image %>"
@@ -44,7 +44,7 @@
   <!-- Product Info -->
   <div class="shop-product-info px-1 flex flex-col flex-grow">
 
-    <a href="/product/<%= product._id %>/view">
+    <a href="/product/<%= product.slug %>/view">
       <h3 class="shop-product-name text-slate-900 font-bold text-sm leading-snug line-clamp-1 group-hover:text-blue-600 transition-colors">
         <%= product.name %>
       </h3>
@@ -88,7 +88,7 @@
         <span class="w-1.5 h-1.5 rounded-full <%= product.stock > 0 ? 'bg-emerald-500' : 'bg-rose-500' %>"></span>
         <%= product.stock > 0 ? product.stock + ' in stock' : 'Out of Stock' %>
       </span>
-      <a href="/product/<%= product._id %>/view" class="text-slate-600 font-semibold hover:text-blue-600 transition-colors text-[11px]">
+      <a href="/product/<%= product.slug %>/view" class="text-slate-600 font-semibold hover:text-blue-600 transition-colors text-[11px]">
         Details →
       </a>
     </div>

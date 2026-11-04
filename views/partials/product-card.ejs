@@ -20,7 +20,7 @@
 
     <!-- Category Badge -->
     <span class="shop-category absolute top-2.5 left-2.5 px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase bg-white/90 backdrop-blur-md text-slate-700 rounded-lg shadow-sm">
-      <%= product.category || 'General' %>
+      <%= product.category_id?.name || 'Not Found' %>
     </span>
 
     <!-- Quick View Button -->
@@ -31,7 +31,7 @@
       data-id="<%= product._id %>"
       data-name="<%= product.name %>"
       data-price="<%= product.price %>"
-      data-category="<%= product.category %>"
+      data-category="<%= product.category_id?.name %>"
       data-description="<%= product.description || '' %>"
       data-image="<%= product.image || '' %>"
       data-stock="<%= product.stock %>"

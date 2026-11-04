@@ -8,6 +8,8 @@ import {
   getHomeProducts,
 } from "../controllers/productController.js";
 import { getContact, submitContact } from "../controllers/contactController.js";
+import { getAddProductPage } from "../controllers/categoryController.js";
+
 import upload from "../config/multer.js";
 
 const router = express.Router();
@@ -33,9 +35,7 @@ router.get("/products", getProducts);
 router.post("/create-product", upload.single("product_image"), createProduct);
 
 // Add Product Page
-router.get("/product/new", (req, res) => {
-  res.render("add-product");
-});
+router.get("/product/new", getAddProductPage);
 
 // Single product details - keep after specific product routes
 router.get("/product/:id/view", getProductDetails);

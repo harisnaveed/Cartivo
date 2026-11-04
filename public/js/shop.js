@@ -203,3 +203,83 @@ if (shopSearchInput) {
 
 // Initial cart counter sync
 updateCartCounter();
+
+// =================================
+// CATEGORIES SLIDER
+// =================================
+
+function initCategorySlider() {
+  const track = document.getElementById("cat-slider-track");
+  const prevBtn = document.getElementById("cat-prev-btn");
+  const nextBtn = document.getElementById("cat-next-btn");
+
+  if (!track || !prevBtn || !nextBtn) return;
+
+  function updateButtons() {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    prevBtn.disabled = track.scrollLeft <= 5;
+    nextBtn.disabled = track.scrollLeft >= maxScroll - 5;
+  }
+
+  prevBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    track.scrollBy({ left: -track.clientWidth * 0.75, behavior: "smooth" });
+  });
+
+  nextBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    track.scrollBy({ left: track.clientWidth * 0.75, behavior: "smooth" });
+  });
+
+  track.addEventListener("scroll", updateButtons, { passive: true });
+  window.addEventListener("resize", updateButtons);
+
+  // Mouse Drag to Scroll
+  let isDown = false;
+  let startX = 0;
+  let scrollLeft = 0;
+  let isDragging = false;
+
+  track.addEventListener("mousedown", (e) => {
+    isDown = true;
+    isDragging = false;
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+
+  window.addEventListener("mouseup", () => {
+    isDown = false;
+    setTimeout(() => {
+      isDragging = false;
+    }, 60);
+  });
+
+  track.addEventListener("mouseleave", () => {
+    isDown = false;
+    isDragging = false;
+  });
+
+  track.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    if (Math.abs(walk) > 5) {
+      isDragging = true;
+    }
+    track.scrollLeft = scrollLeft - walk;
+  });
+
+  // Prevent accidental navigation when dragging
+  track.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      if (isDragging) {
+        e.preventDefault();
+      }
+    });
+  });
+
+  // Initial check
+  updateButtons();
+}
+
+initCategorySlider();

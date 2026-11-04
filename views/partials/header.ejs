@@ -13,36 +13,41 @@
     </a>
 
     <!-- Center Nav Links -->
-    <div class="nav-links hidden md:flex items-center gap-1 bg-slate-50/80 px-2.5 py-1 rounded-full border border-slate-100">
+    <div class="nav-links hidden md:flex items-center gap-1 bg-slate-50/80 px-2 py-1 rounded-full border border-slate-100">
       <a
         href="/"
-        class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath === '/' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900' %>"
+        class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath === '/' ? 'bg-slate-900 text-white shadow-[0_2px_8px_rgba(15,23,42,0.15)]' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70' %>"
       >
-        Home
+        <% if (currentPath === '/') { %><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span><% } %>
+        <span>Home</span>
       </a>
       <a
         href="/shop"
-        class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath === '/shop' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900' %>"
+        class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath === '/shop' ? 'bg-slate-900 text-white shadow-[0_2px_8px_rgba(15,23,42,0.15)]' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70' %>"
       >
-        Shop ▾
+        <% if (currentPath === '/shop') { %><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span><% } %>
+        <span>Shop</span>
       </a>
       <a
         href="/products"
-        class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath.startsWith('/products') ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900' %>"
+        class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath.startsWith('/product') ? 'bg-slate-900 text-white shadow-[0_2px_8px_rgba(15,23,42,0.15)]' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70' %>"
       >
-        Inventory
+        <% if (currentPath.startsWith('/product')) { %><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span><% } %>
+        <span>Inventory</span>
       </a>
       <a
         href="/about"
-        class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath === '/about' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900' %>"
+        class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath === '/about' ? 'bg-slate-900 text-white shadow-[0_2px_8px_rgba(15,23,42,0.15)]' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70' %>"
       >
-        About
+        <% if (currentPath === '/about') { %><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span><% } %>
+        <span>About</span>
       </a>
       <a
         href="/contact"
-        class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath === '/contact' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900' %>"
+        class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 <%= currentPath === '/contact' ? 'bg-slate-900 text-white shadow-[0_2px_8px_rgba(15,23,42,0.15)]' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70' %>"
       >
-        Contact
+        <% if (currentPath === '/contact') { %><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span><% } %>
+        <span>Contact</span>
       </a>
     </div>
 

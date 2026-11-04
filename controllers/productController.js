@@ -1,10 +1,18 @@
 import Product from "../models/Product.js";
+import Category from "../models/Category.js";
+import fs from "fs/promises";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const uploadsDir = path.join(__dirname, "../public/uploads");
 
 // GET: Display all products
 export const getProducts = async (req, res) => {
   try {
     // all products
-    const products = await Product.find();
+    const products = await Product.find().populate("category_id");
 
     // Count active products
     const activeProducts = await Product.countDocuments({
@@ -34,7 +42,7 @@ export const createProduct = async (req, res) => {
       name,
       description,
       price,
-      category,
+      category_id,
       stock,
       condition,
       features,
@@ -49,7 +57,7 @@ export const createProduct = async (req, res) => {
       description,
       image,
       price,
-      category,
+      category_id,
       stock,
       condition,
       features,
@@ -76,7 +84,7 @@ export const getProductDetails = async (req, res) => {
     }
 
     // Find product by ID
-    const product = await Product.findById(id);
+    const product = await Product.findById(id).populate("category_id");
 
     if (!product) {
       return res.status(404).render("404");
@@ -92,7 +100,7 @@ export const getProductDetails = async (req, res) => {
   }
 };
 
-// DELETE: Delete product
+// DELETE: Delete product and its image
 export const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
@@ -102,14 +110,34 @@ export const deleteProduct = async (req, res) => {
       return res.status(400).send("Invalid Product ID");
     }
 
-    // Find and delete product
-    const deletedProduct = await Product.findByIdAndDelete(id);
+    // Find product first
+    const product = await Product.findById(id);
 
-    if (!deletedProduct) {
+    if (!product) {
       return res.status(404).send("Product not found");
     }
 
-    console.log("Product Deleted:", deletedProduct.name);
+    // Delete image from uploads folder
+    if (product.image) {
+      const imageFilename = path.basename(product.image);
+      const imagePath = path.join(uploadsDir, imageFilename);
+
+      try {
+        await fs.unlink(imagePath);
+        console.log("Product image deleted:", imageFilename);
+      } catch (error) {
+        if (error.code !== "ENOENT") {
+          throw error;
+        }
+
+        console.log("Image file not found:", imageFilename);
+      }
+    }
+
+    // Delete product from MongoDB
+    await Product.findByIdAndDelete(id);
+
+    console.log("Product Deleted:", product.name);
 
     res.redirect("/products");
   } catch (error) {
@@ -135,22 +163,33 @@ export const getShopProducts = async (req, res) => {
   }
 };
 
-// GET: Home page with active products (fetches from database just like shop page)
+// GET: Home page with active categories and products
 export const getHomeProducts = async (req, res) => {
   try {
+    // Fetch active products
     const products = await Product.find({
+      status: "active",
+    })
+      .populate("category_id")
+      .sort({ createdAt: -1 });
+
+    // Fetch active categories
+    const categories = await Category.find({
       status: "active",
     }).sort({ createdAt: -1 });
 
     res.render("home", {
-      products: products || [],
+      products,
+      categories,
       currentPage: "home",
       success: req.query.success === "true",
     });
   } catch (error) {
     console.error("Home Route Error:", error.message);
-    res.render("home", {
+
+    res.status(500).render("home", {
       products: [],
+      categories: [],
       currentPage: "home",
       success: false,
     });

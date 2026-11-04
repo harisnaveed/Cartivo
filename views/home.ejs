@@ -78,11 +78,9 @@
             <div class="px-2 sm:px-3">
               <select name="category" class="text-xs font-semibold text-slate-600 bg-transparent focus:outline-none cursor-pointer pr-1">
                 <option value="">Categories</option>
-                <option value="furniture">Furniture</option>
-                <option value="electronics">Electronics</option>
-                <option value="vehicles">Vehicles</option>
-                <option value="properties">Properties</option>
-                <option value="fashion">Fashion</option>
+                <% categories.forEach(category => { %>
+                  <option value="<%= category.name %>"><%= category.name %></option>
+                <% }) %>
               </select>
             </div>
 
@@ -150,76 +148,56 @@
       </section>
 
       <!-- ==========================================
-           2. FLOATING CATEGORIES BAR
+           2. FLOATING CATEGORIES SLIDER
       =========================================== -->
       <section id="categories" class="relative z-10 -mt-2 mb-16 scroll-mt-24">
-        <div class="p-4 sm:p-5 bg-white/80 backdrop-blur-md rounded-3xl border border-slate-200/80 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.04)]">
-          <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4">
-            
-            <!-- Category 1: Home & Living -->
-            <a href="/shop?category=furniture" class="group flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-100 hover:border-slate-300 hover:shadow-md hover:-translate-y-1 transition-all">
-              <div class="w-11 h-11 rounded-xl bg-slate-50 group-hover:bg-blue-50 text-slate-600 group-hover:text-blue-600 flex items-center justify-center text-base mb-2 transition-colors">
-                <i class="fa-solid fa-couch"></i>
-              </div>
-              <span class="text-xs font-bold text-slate-800 group-hover:text-slate-900">Home</span>
-              <span class="text-[10px] text-slate-400">Furniture</span>
-            </a>
+        <div class="relative p-4 sm:p-5 bg-white/80 backdrop-blur-md rounded-3xl border border-slate-200/80 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.04)] group/slider">
 
-            <!-- Category 2: Properties -->
-            <a href="/shop?category=properties" class="group flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-100 hover:border-slate-300 hover:shadow-md hover:-translate-y-1 transition-all">
-              <div class="w-11 h-11 rounded-xl bg-slate-50 group-hover:bg-amber-50 text-slate-600 group-hover:text-amber-600 flex items-center justify-center text-base mb-2 transition-colors">
-                <i class="fa-solid fa-building"></i>
-              </div>
-              <span class="text-xs font-bold text-slate-800 group-hover:text-slate-900">Properties</span>
-              <span class="text-[10px] text-slate-400">Real Estate</span>
-            </a>
+          <!-- Left Navigation Arrow -->
+          <button
+            type="button"
+            id="cat-prev-btn"
+            class="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-md text-slate-700 hover:text-white hover:bg-slate-900 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-0 disabled:pointer-events-none"
+            title="Previous categories"
+            aria-label="Previous categories"
+          >
+            <i class="fa-solid fa-chevron-left text-xs"></i>
+          </button>
 
-            <!-- Category 3: Electronics -->
-            <a href="/shop?category=electronics" class="group flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-100 hover:border-slate-300 hover:shadow-md hover:-translate-y-1 transition-all">
-              <div class="w-11 h-11 rounded-xl bg-slate-50 group-hover:bg-purple-50 text-slate-600 group-hover:text-purple-600 flex items-center justify-center text-base mb-2 transition-colors">
-                <i class="fa-solid fa-laptop"></i>
-              </div>
-              <span class="text-xs font-bold text-slate-800 group-hover:text-slate-900">Electronics</span>
-              <span class="text-[10px] text-slate-400">Tech & Gadgets</span>
-            </a>
+          <!-- Right Navigation Arrow -->
+          <button
+            type="button"
+            id="cat-next-btn"
+            class="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-md text-slate-700 hover:text-white hover:bg-slate-900 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-0 disabled:pointer-events-none"
+            title="Next categories"
+            aria-label="Next categories"
+          >
+            <i class="fa-solid fa-chevron-right text-xs"></i>
+          </button>
 
-            <!-- Category 4: Animals & Pets -->
-            <a href="/shop?category=pets" class="group flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-100 hover:border-slate-300 hover:shadow-md hover:-translate-y-1 transition-all">
-              <div class="w-11 h-11 rounded-xl bg-slate-50 group-hover:bg-rose-50 text-slate-600 group-hover:text-rose-600 flex items-center justify-center text-base mb-2 transition-colors">
-                <i class="fa-solid fa-heart"></i>
-              </div>
-              <span class="text-xs font-bold text-slate-800 group-hover:text-slate-900">Animals</span>
-              <span class="text-[10px] text-slate-400">Pets & Care</span>
-            </a>
-
-            <!-- Category 5: Vehicles / Location -->
-            <a href="/shop?category=vehicles" class="group flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-100 hover:border-slate-300 hover:shadow-md hover:-translate-y-1 transition-all">
-              <div class="w-11 h-11 rounded-xl bg-slate-50 group-hover:bg-emerald-50 text-slate-600 group-hover:text-emerald-600 flex items-center justify-center text-base mb-2 transition-colors">
-                <i class="fa-solid fa-car"></i>
-              </div>
-              <span class="text-xs font-bold text-slate-800 group-hover:text-slate-900">Vehicles</span>
-              <span class="text-[10px] text-slate-400">Cars & Motors</span>
-            </a>
-
-            <!-- Category 6: Fashion / Origin -->
-            <a href="/shop?category=fashion" class="group flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-100 hover:border-slate-300 hover:shadow-md hover:-translate-y-1 transition-all">
-              <div class="w-11 h-11 rounded-xl bg-slate-50 group-hover:bg-cyan-50 text-slate-600 group-hover:text-cyan-600 flex items-center justify-center text-base mb-2 transition-colors">
-                <i class="fa-solid fa-user-tie"></i>
-              </div>
-              <span class="text-xs font-bold text-slate-800 group-hover:text-slate-900">Fashion</span>
-              <span class="text-[10px] text-slate-400">Style & Wear</span>
-            </a>
-
-            <!-- Category 7: Services -->
-            <a href="/shop?category=services" class="group flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-100 hover:border-slate-300 hover:shadow-md hover:-translate-y-1 transition-all col-span-2 sm:col-span-1">
-              <div class="w-11 h-11 rounded-xl bg-slate-50 group-hover:bg-indigo-50 text-slate-600 group-hover:text-indigo-600 flex items-center justify-center text-base mb-2 transition-colors">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-              </div>
-              <span class="text-xs font-bold text-slate-800 group-hover:text-slate-900">Services</span>
-              <span class="text-[10px] text-slate-400">Professional</span>
-            </a>
-
+          <!-- Slider Track -->
+          <div
+            id="cat-slider-track"
+            class="flex items-center gap-3 sm:gap-4 overflow-x-auto scroll-smooth no-scrollbar py-1 px-1 cursor-grab active:cursor-grabbing select-none"
+          >
+            <!-- Categories -->
+            <% if (typeof categories !== 'undefined' && categories && categories.length > 0) { %>
+              <% categories.forEach(category => { %>
+                <a
+                  href="/shop?category=<%= encodeURIComponent(category.name) %>"
+                  class="group flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-100 hover:border-slate-300 hover:shadow-md hover:-translate-y-1 transition-all flex-shrink-0 w-[125px] sm:w-[145px] lg:w-[155px] text-center"
+                >
+                  <div class="w-11 h-11 rounded-xl bg-slate-50 group-hover:bg-blue-50 text-slate-600 group-hover:text-blue-600 flex items-center justify-center text-base mb-2 transition-colors">
+                    <i class="<%= category.icon %>"></i>
+                  </div>
+                  <span class="text-xs font-bold text-slate-800 group-hover:text-slate-900 truncate max-w-full block px-1">
+                    <%= category.name %>
+                  </span>
+                </a>
+              <% }) %>
+            <% } %>
           </div>
+
         </div>
       </section>
 

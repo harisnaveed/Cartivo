@@ -219,19 +219,16 @@
                 Category <span class="text-rose-500">*</span>
               </label>
               <select
-                name="category"
+                name="category_id"
                 required
                 class="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all cursor-pointer"
               >
                 <option value="" disabled selected>Select category</option>
-                <option value="furniture">Furniture</option>
-                <option value="electronics">Electronics</option>
-                <option value="vehicles">Vehicles</option>
-                <option value="properties">Properties</option>
-                <option value="fashion">Fashion</option>
-                <option value="services">Services</option>
-                <option value="workspace">Workspace</option>
-                <option value="books">Books</option>
+                <% categories.forEach(category => { %>
+                    <option value="<%= category._id %>">
+                        <i class="<%= category.icon %>"></i> <%= category.name %>
+                    </option>
+                <% }) %>
               </select>
             </div>
 

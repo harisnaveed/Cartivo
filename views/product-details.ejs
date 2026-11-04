@@ -69,7 +69,7 @@
                 <!-- Badges -->
                 <div class="flex flex-wrap items-center gap-2.5 mb-5">
                     <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700">
-                        <%= product.category || 'General' %>
+                        <%= product.category_id?.name || 'Not Found' %>
                     </span>
 
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold capitalize <%= product.status === 'active' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-600' %>">

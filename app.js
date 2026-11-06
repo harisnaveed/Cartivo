@@ -1,6 +1,9 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import adminCategoryRoutes from "./admin/routes/adminCategoryRoutes.js";
+import adminProductRoutes from "./admin/routes/adminProductRoutes.js";
+
 
 // ES Module equivalent of __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -32,6 +35,7 @@ app.use((req, res, next) => {
 import pageRoutes from "./routes/pageRoutes.js";
 
 app.use("/", pageRoutes);
-
+app.use("/admin/categories", adminCategoryRoutes);
+app.use("/admin/products", adminProductRoutes);
 // Export application
 export default app;

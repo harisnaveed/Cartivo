@@ -28,9 +28,6 @@ router.get("/contact", getContact);
 // Contact form submission (POST)
 router.post("/contact", submitContact);
 
-// Products page
-router.get("/products", getProducts);
-
 // Create product
 router.post("/create-product", upload.single("product_image"), createProduct);
 
@@ -46,6 +43,12 @@ router.post("/product/:id/delete", deleteProduct);
 // all active products for shop page
 router.get("/shop", getShopProducts);
 
+
+// admin routes start
+// Products page
+router.get("/admin/products", getProducts);
+
+// damin routes end
 // 404 - Always last
 router.use((req, res) => {
   res.status(404).render("404");

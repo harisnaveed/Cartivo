@@ -24,7 +24,7 @@ export const getProducts = async (req, res) => {
       stock: { $lt: 5 },
     });
 
-    res.render("products", {
+    res.render("admin/products/products", {
       products: products,
       activeProducts,
       lowStockProducts,

@@ -3,6 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import adminCategoryRoutes from "./admin/routes/adminCategoryRoutes.js";
 import adminProductRoutes from "./admin/routes/adminProductRoutes.js";
+import adminRoutes from "./admin/routes/adminRoutes.js";
 
 
 // ES Module equivalent of __dirname
@@ -34,8 +35,10 @@ app.use((req, res, next) => {
 // Routes
 import pageRoutes from "./routes/pageRoutes.js";
 
-app.use("/", pageRoutes);
+
+app.use("/admin", adminRoutes);
 app.use("/admin/categories", adminCategoryRoutes);
 app.use("/admin/products", adminProductRoutes);
+app.use("/", pageRoutes);
 // Export application
 export default app;

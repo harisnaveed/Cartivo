@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Edit Product | Cartivo Admin Portal</title>
+    <%- include('../partials/headcdns') %>
+  </head>
+
+  <body class="admin-body selection:bg-amber-100 selection:text-amber-900">
+
+    <div class="admin-shell">
+      
+      <!-- Admin Sidebar Navigation -->
+      <%- include('../partials/sidebar', { currentPage: 'products' }) %>
+
+      <!-- Main Layout Wrapper -->
+      <div class="admin-main-wrapper">
+        
+        <!-- Admin Top Navigation Bar -->
+        <%- include('../partials/header', { title: 'Edit Product' }) %>
+
+        <!-- Content Canvas -->
+        <main class="admin-content">
+
+          <%
+            const prod = typeof product !== 'undefined' ? product : {
+              _id: 'sample-prod-id',
+              name: 'iPhone 15 Pro Max',
+              description: 'Flagship Apple smartphone with Titanium design.',
+              price: 1199,
+              stock: 12,
+              condition: 'New',
+              features: 'A17 Pro, 48MP Camera, 5G, USB-C',
+              status: 'active',
+              category_id: 'cat2',
+              image: ''
+            };
+
+            const categoryList = (typeof categories !== 'undefined' && categories.length > 0) ? categories : [
+              { _id: 'cat1', name: 'Electronics' },
+              { _id: 'cat2', name: 'Mobile Phones' },
+              { _id: 'cat3', name: 'Computers' },
+              { _id: 'cat4', name: 'Accessories' },
+              { _id: 'cat5', name: 'Gaming' }
+            ];
+
+            const currentCatId = prod.category_id?._id ? prod.category_id._id.toString() : (prod.category_id ? prod.category_id.toString() : '');
+          %>
+
+          <!-- Page Heading -->
+          <section class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 sm:p-8 bg-white/85 backdrop-blur-md rounded-3xl border border-slate-200/80 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.03)] mb-8">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/90 border border-slate-200/60 text-[11px] font-semibold text-slate-600 mb-2 tracking-wide uppercase">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                INVENTORY / EDIT
+              </div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                Edit <%= prod.name %>.
+              </h1>
+              <p class="text-slate-500 text-xs sm:text-sm mt-1">
+                Update specifications, pricing, inventory stock, or replace product imagery.
+              </p>
+            </div>
+
+            <div class="flex items-center gap-2 self-start sm:self-auto">
+              <% if (prod.slug) { %>
+                <a
+                  href="/product/<%= prod.slug %>/view"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-all"
+                  title="View in live storefront"
+                >
+                  <i class="fa-solid fa-eye text-[10px]"></i>
+                  <span>Storefront ↗</span>
+                </a>
+              <% } %>
+              <a
+                href="/admin/products"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-all"
+              >
+                <i class="fa-solid fa-arrow-left text-[10px]"></i>
+                <span>Back</span>
+              </a>
+            </div>
+          </section>
+
+          <!-- Form Grid -->
+          <form
+            action="/admin/products/<%= prod._id %>/update"
+            method="POST"
+            enctype="multipart/form-data"
+            class="grid grid-cols-1 lg:grid-cols-12 gap-8"
+          >
+
+            <!-- Left Column: Core Product Details (8 Cols) -->
+            <div class="lg:col-span-8 space-y-6">
+
+              <!-- General Info Card -->
+              <div class="admin-card p-6 sm:p-8 space-y-5">
+                <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-3">
+                  Product Overview
+                </h2>
+
+                <!-- Product Name -->
+                <div>
+                  <label for="name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                    Product Title <span class="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    value="<%= prod.name %>"
+                    placeholder="e.g. MacBook Pro M4..."
+                    class="w-full px-4 py-3 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all bg-white"
+                  />
+                </div>
+
+                <!-- Description -->
+                <div>
+                  <label for="description" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                    Description
+                  </label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    rows="4"
+                    class="w-full px-4 py-3 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all bg-white"
+                  ><%= prod.description || '' %></textarea>
+                </div>
+
+                <!-- Features Highlight -->
+                <div>
+                  <label for="features" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                    Key Features (Comma-Separated)
+                  </label>
+                  <input
+                    type="text"
+                    id="features"
+                    name="features"
+                    value="<%= prod.features || '' %>"
+                    placeholder="e.g. 16GB RAM, 512GB SSD"
+                    class="w-full px-4 py-3 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all bg-white"
+                  />
+                </div>
+              </div>
+
+              <!-- Pricing & Inventory Card -->
+              <div class="admin-card p-6 sm:p-8 space-y-5">
+                <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-3">
+                  Pricing & Stock
+                </h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  
+                  <!-- Price -->
+                  <div>
+                    <label for="price" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                      Price (USD $) <span class="text-rose-500">*</span>
+                    </label>
+                    <div class="relative">
+                      <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 font-bold text-sm">$</span>
+                      <input
+                        type="number"
+                        id="price"
+                        name="price"
+                        step="0.01"
+                        min="0"
+                        required
+                        value="<%= prod.price %>"
+                        class="w-full pl-8 pr-4 py-3 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all bg-white font-semibold"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Stock -->
+                  <div>
+                    <label for="stock" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                      Available Stock <span class="text-rose-500">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      id="stock"
+                      name="stock"
+                      min="0"
+                      value="<%= prod.stock %>"
+                      required
+                      class="w-full px-4 py-3 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all bg-white"
+                    />
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Column: Taxonomy, Image & Status (4 Cols) -->
+            <div class="lg:col-span-4 space-y-6">
+
+              <!-- Category & Classification Card -->
+              <div class="admin-card p-6 space-y-5">
+                <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-3">
+                  Organization
+                </h2>
+
+                <!-- Category -->
+                <div>
+                  <label for="category_id" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                    Category <span class="text-rose-500">*</span>
+                  </label>
+                  <select
+                    id="category_id"
+                    name="category_id"
+                    required
+                    class="w-full px-4 py-3 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all bg-white"
+                  >
+                    <% categoryList.forEach((cat) => { %>
+                      <option value="<%= cat._id %>" <%= cat._id.toString() === currentCatId ? 'selected' : '' %>>
+                        <%= cat.name %>
+                      </option>
+                    <% }); %>
+                  </select>
+                </div>
+
+                <!-- Condition -->
+                <div>
+                  <label for="condition" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                    Item Condition
+                  </label>
+                  <select
+                    id="condition"
+                    name="condition"
+                    class="w-full px-4 py-3 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all bg-white"
+                  >
+                    <option value="New" <%= prod.condition === 'New' ? 'selected' : '' %>>Brand New (Sealed)</option>
+                    <option value="Like New" <%= prod.condition === 'Like New' ? 'selected' : '' %>>Like New (Open Box)</option>
+                    <option value="Refurbished" <%= prod.condition === 'Refurbished' ? 'selected' : '' %>>Refurbished / Certified</option>
+                    <option value="Used" <%= prod.condition === 'Used' ? 'selected' : '' %>>Used / Pre-Owned</option>
+                  </select>
+                </div>
+
+                <!-- Status -->
+                <div>
+                  <label for="status" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                    Visibility Status
+                  </label>
+                  <select
+                    id="status"
+                    name="status"
+                    class="w-full px-4 py-3 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all bg-white"
+                  >
+                    <option value="active" <%= prod.status === 'active' ? 'selected' : '' %>>Active (Visible in store)</option>
+                    <option value="inactive" <%= prod.status === 'inactive' ? 'selected' : '' %>>Inactive (Hidden from customers)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Media Upload Card with Existing & New Image Preview -->
+              <div class="admin-card p-6 space-y-4">
+                <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-3">
+                  Product Image
+                </h2>
+
+                <!-- Image Preview Box -->
+                <div
+                  id="product-image-preview-box"
+                  class="w-full aspect-video rounded-2xl border <%= prod.image ? 'border-solid border-slate-200' : 'border-2 border-dashed border-slate-200' %> bg-slate-50 flex items-center justify-center overflow-hidden transition-all relative"
+                >
+                  <img
+                    id="product-image-preview"
+                    src="<%= prod.image || '#' %>"
+                    alt="<%= prod.name %>"
+                    class="w-full h-full object-cover <%= prod.image ? '' : 'hidden' %>"
+                  />
+                  <div id="product-image-placeholder" class="text-center p-4 text-slate-400 <%= prod.image ? 'hidden' : '' %>">
+                    <i class="fa-solid fa-cloud-arrow-up text-3xl mb-2 block text-slate-300"></i>
+                    <span class="text-xs font-semibold block">Select replacement image</span>
+                    <span class="text-[10px] text-slate-400 block mt-0.5">JPG, PNG, WEBP (Max 2MB)</span>
+                  </div>
+                </div>
+
+                <!-- File Input -->
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-500 mb-1">
+                    <%= prod.image ? 'Replace current image (optional):' : 'Upload an image:' %>
+                  </label>
+                  <input
+                    type="file"
+                    id="product-image-input"
+                    name="product_image"
+                    accept="image/png, image/jpeg, image/webp"
+                    class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-slate-900 file:text-white hover:file:bg-slate-800 file:cursor-pointer cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              <!-- Submit & Cancel Actions Card -->
+              <div class="admin-card p-6 space-y-3">
+                <button
+                  type="submit"
+                  class="w-full py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-md hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
+                >
+                  <i class="fa-solid fa-check text-xs text-amber-400"></i>
+                  <span>Update Product</span>
+                </button>
+
+                <a
+                  href="/admin/products"
+                  class="w-full py-2.5 rounded-full border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50 transition-colors block text-center"
+                >
+                  Cancel
+                </a>
+              </div>
+
+            </div>
+
+          </form>
+
+        </main>
+
+        <!-- Admin Footer -->
+        <%- include('../partials/footer') %>
+
+      </div>
+
+    </div>
+
+    <!-- Admin Client Scripts -->
+    <%- include('../partials/footercdns') %>
+
+  </body>
+</html>
+

@@ -12,16 +12,16 @@ import {
 const router = express.Router();
 
 // Category management
-router.get("/categories", getAdminCategories);
+router.get("/", getAdminCategories);
 
-router.get("/categories/create", getAdminAddCategory);
+router.get("/create", getAdminAddCategory);
 
-router.post("/categories", createAdminCategory);
+router.post("/", createAdminCategory);
 
-router.get("/categories/:id/edit", getAdminEditCategory);
+router.get("/:id/edit", getAdminEditCategory);
 
-router.post("/categories/:id/update", updateAdminCategory);
+router.post("/:id/update", updateAdminCategory);
 
-router.post("/categories/:id/delete", deleteAdminCategory);
+router.post("/:id/delete", deleteAdminCategory);
 
 export default router;

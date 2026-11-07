@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Categories | Cartivo Admin Portal</title>
+    <%- include('../partials/headcdns') %>
+  </head>
+
+  <body class="admin-body selection:bg-amber-100 selection:text-amber-900">
+
+    <div class="admin-shell">
+      
+      <!-- Admin Sidebar Navigation -->
+      <%- include('../partials/sidebar', { currentPage: 'categories' }) %>
+
+      <!-- Main Layout Wrapper -->
+      <div class="admin-main-wrapper">
+        
+        <!-- Admin Top Navigation Bar -->
+        <%- include('../partials/header', { title: 'Manage Categories' }) %>
+
+        <!-- Content Canvas -->
+        <main class="admin-content">
+
+          <!-- Page Heading -->
+          <section class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 sm:p-8 bg-white/85 backdrop-blur-md rounded-3xl border border-slate-200/80 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.03)] mb-8">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/90 border border-slate-200/60 text-[11px] font-semibold text-slate-600 mb-2 tracking-wide uppercase">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                TAXONOMY MANAGEMENT
+              </div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                Product Categories
+              </h1>
+              <p class="text-slate-500 text-xs sm:text-sm mt-1">
+                Organize store departments, customize icons, and manage taxonomy visibility.
+              </p>
+            </div>
+
+            <a
+              href="/admin/categories/create"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-md transition-all hover:-translate-y-0.5 self-start sm:self-auto"
+            >
+              <span>＋</span> Add Category
+            </a>
+          </section>
+
+          <!-- Table Container Card -->
+          <section class="admin-card overflow-hidden">
+            
+            <!-- Table Toolbar (Search & Count) -->
+            <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                  <span>All Categories</span>
+                  <span id="table-record-count" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700">
+                    <%= typeof categories !== 'undefined' ? categories.length : '8' %> total
+                  </span>
+                </h2>
+                <p class="text-xs text-slate-400 mt-0.5">Filter and modify category attributes.</p>
+              </div>
+
+              <!-- Instant Client-Side Table Search -->
+              <div class="w-full sm:w-72 bg-white px-4 py-2 rounded-full border border-slate-200 shadow-xs flex items-center gap-2.5 focus-within:ring-2 focus-within:ring-slate-900/10 focus-within:border-slate-300 transition-all">
+                <i class="fa-solid fa-magnifying-glass text-slate-400 text-xs"></i>
+                <input
+                  type="text"
+                  id="admin-table-search"
+                  placeholder="Search categories..."
+                  class="w-full text-xs text-slate-800 placeholder-slate-400 bg-transparent focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <!-- Table Wrapper -->
+            <div class="overflow-x-auto">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th class="pl-6 w-16">Icon</th>
+                    <th>Category Name</th>
+                    <th>Slug</th>
+                    <th>Status</th>
+                    <th class="pr-6 text-right">Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody class="divide-y divide-slate-100">
+                  <% 
+                    // Support both server data and fallback sample preview data
+                    const categoryList = (typeof categories !== 'undefined' && categories.length > 0) ? categories : [
+                      { _id: '1', name: 'Electronics', slug: 'electronics', icon: 'fa-solid fa-laptop', status: 'active' },
+                      { _id: '2', name: 'Mobile Phones', slug: 'mobile-phones', icon: 'fa-solid fa-mobile-screen', status: 'active' },
+                      { _id: '3', name: 'Computers', slug: 'computers', icon: 'fa-solid fa-computer', status: 'active' },
+                      { _id: '4', name: 'Accessories', slug: 'accessories', icon: 'fa-solid fa-headphones', status: 'active' },
+                      { _id: '5', name: 'Gaming', slug: 'gaming', icon: 'fa-solid fa-gamepad', status: 'active' },
+                      { _id: '6', name: 'Home Appliances', slug: 'home-appliances', icon: 'fa-solid fa-blender', status: 'active' },
+                      { _id: '7', name: 'Smart Watches', slug: 'smart-watches', icon: 'fa-solid fa-clock', status: 'active' },
+                      { _id: '8', name: 'Cameras', slug: 'cameras', icon: 'fa-solid fa-camera', status: 'active' }
+                    ];
+                  %>
+
+                  <% categoryList.forEach((category) => { %>
+                    <tr class="transition-colors">
+                      
+                      <!-- Icon Preview -->
+                      <td class="pl-6 py-4">
+                        <div class="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200/80 flex items-center justify-center text-slate-700 shadow-2xs">
+                          <i class="<%= category.icon || 'fa-solid fa-tag' %> text-sm"></i>
+                        </div>
+                      </td>
+
+                      <!-- Name -->
+                      <td class="font-bold text-slate-900">
+                        <%= category.name %>
+                      </td>
+
+                      <!-- Slug -->
+                      <td class="text-slate-500 font-mono text-xs">
+                        /<%= category.slug %>
+                      </td>
+
+                      <!-- Status -->
+                      <td>
+                        <span class="badge-status <%= category.status === 'active' ? 'badge-status-active' : 'badge-status-inactive' %>">
+                          <span class="w-1.5 h-1.5 rounded-full <%= category.status === 'active' ? 'bg-emerald-500' : 'bg-slate-400' %>"></span>
+                          <%= category.status %>
+                        </span>
+                      </td>
+
+                      <!-- Actions -->
+                      <td class="pr-6 text-right">
+                        <div class="flex items-center justify-end gap-2">
+                          <!-- Edit Button -->
+                          <a
+                            href="/admin/categories/<%= category._id %>/edit"
+                            class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 flex items-center justify-center transition-colors"
+                            title="Edit Category"
+                          >
+                            <i class="fa-solid fa-pen text-xs"></i>
+                          </a>
+
+                          <!-- Delete Form -->
+                          <form
+                            action="/admin/categories/<%= category._id %>/delete"
+                            method="POST"
+                            data-confirm="Are you sure you want to delete <%= category.name %>?"
+                            class="inline"
+                          >
+                            <button
+                              type="submit"
+                              class="w-8 h-8 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 flex items-center justify-center transition-colors"
+                              title="Delete Category"
+                            >
+                              <i class="fa-solid fa-trash text-xs"></i>
+                            </button>
+                          </form>
+                        </div>
+                      </td>
+
+                    </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Table Footer -->
+            <div class="p-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+              <span>Showing all registered categories</span>
+              <a href="/admin/categories/create" class="text-xs font-semibold text-slate-800 hover:text-blue-600 transition-colors">
+                ＋ Add New Category
+              </a>
+            </div>
+
+          </section>
+
+        </main>
+
+        <!-- Admin Footer -->
+        <%- include('../partials/footer') %>
+
+      </div>
+
+    </div>
+
+    <!-- Admin Client Scripts -->
+    <%- include('../partials/footercdns') %>
+
+  </body>
+</html>

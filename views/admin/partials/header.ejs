@@ -1,0 +1,76 @@
+<!-- Top Navigation Bar -->
+<header class="admin-topbar">
+  
+  <!-- Left Side: Mobile Hamburger & Breadcrumb -->
+  <div class="flex items-center gap-3 sm:gap-4">
+    <!-- Hamburger button for mobile drawer -->
+    <button
+      id="sidebar-toggle-btn"
+      class="lg:hidden w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors"
+      aria-label="Open Navigation Sidebar"
+    >
+      <i class="fa-solid fa-bars text-sm"></i>
+    </button>
+
+    <!-- Page Title / Breadcrumb -->
+    <div>
+      <div class="flex items-center gap-2 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+        <span>Cartivo Back-Office</span>
+        <i class="fa-solid fa-chevron-right text-[8px] text-slate-300"></i>
+        <span class="text-slate-600"><%= typeof title !== 'undefined' ? title : 'Admin' %></span>
+      </div>
+      <h1 class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight leading-tight hidden sm:block">
+        <%= typeof title !== 'undefined' ? title : 'Overview' %>
+      </h1>
+    </div>
+  </div>
+
+  <!-- Right Side: Quick Action Capsule & Profile -->
+  <div class="flex items-center gap-2.5 sm:gap-3">
+    
+    <!-- Quick Add Shortcuts (Desktop) -->
+    <div class="hidden md:flex items-center gap-2">
+      <a
+        href="/admin/products/create"
+        class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-all"
+        title="Add Product"
+      >
+        <span class="text-amber-500 font-extrabold text-xs">＋</span>
+        <span>Product</span>
+      </a>
+
+      <a
+        href="/admin/categories/create"
+        class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-all"
+        title="Add Category"
+      >
+        <span class="text-amber-500 font-extrabold text-xs">＋</span>
+        <span>Category</span>
+      </a>
+    </div>
+
+    <!-- Storefront Quick Link -->
+    <a
+      href="/"
+      target="_blank"
+      class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 flex items-center justify-center transition-colors relative"
+      title="View Customer Storefront"
+    >
+      <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+    </a>
+
+    <!-- Admin User Badge -->
+    <div class="flex items-center gap-2 pl-2 border-l border-slate-200">
+      <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-slate-900 to-slate-700 text-white flex items-center justify-center font-bold text-xs ring-2 ring-slate-100 shadow-xs">
+        <span class="text-amber-400">A</span>
+      </div>
+      <div class="hidden xl:block text-left">
+        <span class="text-xs font-bold text-slate-900 block leading-tight">Admin User</span>
+        <span class="text-[10px] text-slate-400 block leading-none">Super Administrator</span>
+      </div>
+    </div>
+
+  </div>
+
+</header>
+

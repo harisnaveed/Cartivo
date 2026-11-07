@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dashboard | Cartivo Admin Portal</title>
+    <%- include('partials/headcdns') %>
+  </head>
+
+  <body class="admin-body selection:bg-amber-100 selection:text-amber-900">
+
+    <div class="admin-shell">
+      
+      <!-- Admin Sidebar Navigation -->
+      <%- include('partials/sidebar', { currentPage: 'dashboard' }) %>
+
+      <!-- Main Layout Wrapper -->
+      <div class="admin-main-wrapper">
+        
+        <!-- Admin Top Navigation Bar -->
+        <%- include('partials/header', { title: 'Executive Dashboard' }) %>
+
+        <!-- Content Canvas -->
+        <main class="admin-content">
+          
+          <!-- Welcome Hero Banner -->
+          <section class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 sm:p-8 bg-white/85 backdrop-blur-md rounded-3xl border border-slate-200/80 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.03)] mb-8">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/90 border border-slate-200/60 text-[11px] font-semibold text-slate-600 mb-2 tracking-wide uppercase">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                SYSTEM OVERVIEW
+              </div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                Welcome back to Cartivo Admin.
+              </h1>
+              <p class="text-slate-500 text-xs sm:text-sm mt-1">
+                Monitor stock levels, organize product categories, and manage marketplace listings.
+              </p>
+            </div>
+
+            <!-- Quick Action Group -->
+            <div class="flex items-center gap-2.5 self-start sm:self-auto flex-wrap">
+              <a
+                href="/admin/products/create"
+                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-md transition-all hover:-translate-y-0.5"
+              >
+                <span>＋</span> Add Product
+              </a>
+              <a
+                href="/admin/categories/create"
+                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold shadow-md transition-all hover:-translate-y-0.5"
+              >
+                <span>＋</span> Add Category
+              </a>
+            </div>
+          </section>
+
+          <!-- KPI Metric Stats Cards -->
+          <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+            
+            <!-- Total Products -->
+            <div class="admin-card p-6 flex flex-col justify-between">
+              <div class="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+                <span>Total Products</span>
+                <span class="w-9 h-9 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm">
+                  <i class="fa-solid fa-boxes-stacked"></i>
+                </span>
+              </div>
+              <div class="text-3xl font-extrabold text-slate-900 mb-1">
+                <%= typeof products !== 'undefined' ? products.length : '10' %>
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-slate-400 mt-2">
+                <span>In database collection</span>
+                <a href="/admin/products" class="font-bold text-blue-600 hover:underline">Manage →</a>
+              </div>
+            </div>
+
+            <!-- Total Categories -->
+            <div class="admin-card p-6 flex flex-col justify-between">
+              <div class="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+                <span>Categories</span>
+                <span class="w-9 h-9 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-sm">
+                  <i class="fa-solid fa-tags"></i>
+                </span>
+              </div>
+              <div class="text-3xl font-extrabold text-slate-900 mb-1">
+                <%= typeof categories !== 'undefined' ? categories.length : '8' %>
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-slate-400 mt-2">
+                <span>Active taxonomies</span>
+                <a href="/admin/categories" class="font-bold text-purple-600 hover:underline">Manage →</a>
+              </div>
+            </div>
+
+            <!-- Active Listings -->
+            <div class="admin-card p-6 flex flex-col justify-between">
+              <div class="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+                <span>Active Items</span>
+                <span class="w-9 h-9 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm">
+                  <i class="fa-solid fa-circle-check"></i>
+                </span>
+              </div>
+              <div class="text-3xl font-extrabold text-emerald-600 mb-1">
+                <%= typeof activeProducts !== 'undefined' ? activeProducts : '10' %>
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-slate-400 mt-2">
+                <span>Visible to customers</span>
+                <span class="text-emerald-600 font-semibold">100% Live</span>
+              </div>
+            </div>
+
+            <!-- Low Stock Alert -->
+            <div class="admin-card p-6 flex flex-col justify-between">
+              <div class="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+                <span>Low Stock</span>
+                <span class="w-9 h-9 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-sm">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                </span>
+              </div>
+              <div class="text-3xl font-extrabold text-amber-500 mb-1">
+                <%= typeof lowStockProducts !== 'undefined' ? lowStockProducts : '1' %>
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-slate-400 mt-2">
+                <span>5 units or fewer</span>
+                <span class="text-amber-600 font-semibold">Check stock</span>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- Quick Navigation Banner -->
+          <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            
+            <!-- Products Card Portal -->
+            <div class="admin-card p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group">
+              <div class="relative z-10">
+                <span class="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-700 mb-4">
+                  INVENTORY CONTROL
+                </span>
+                <h2 class="text-xl font-extrabold text-slate-900 mb-2">Manage All Products</h2>
+                <p class="text-xs text-slate-500 leading-relaxed mb-6">
+                  Inspect stock thresholds, upload product images, adjust prices, and toggle public visibility.
+                </p>
+                <div class="flex items-center gap-3">
+                  <a
+                    href="/admin/products"
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition-colors"
+                  >
+                    <span>View Products</span>
+                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                  </a>
+                  <a
+                    href="/admin/products/create"
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200 transition-colors"
+                  >
+                    <span>＋ Add New</span>
+                  </a>
+                </div>
+              </div>
+              <div class="absolute -bottom-6 -right-6 text-slate-100 text-8xl pointer-events-none group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-boxes-stacked"></i>
+              </div>
+            </div>
+
+            <!-- Categories Card Portal -->
+            <div class="admin-card p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group">
+              <div class="relative z-10">
+                <span class="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-50 text-amber-700 border border-amber-200 mb-4">
+                  TAXONOMY CONTROL
+                </span>
+                <h2 class="text-xl font-extrabold text-slate-900 mb-2">Manage Categories</h2>
+                <p class="text-xs text-slate-500 leading-relaxed mb-6">
+                  Create and organize store departments, assign FontAwesome icons, and oversee catalog navigation.
+                </p>
+                <div class="flex items-center gap-3">
+                  <a
+                    href="/admin/categories"
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition-colors"
+                  >
+                    <span>View Categories</span>
+                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                  </a>
+                  <a
+                    href="/admin/categories/create"
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200 transition-colors"
+                  >
+                    <span>＋ Add New</span>
+                  </a>
+                </div>
+              </div>
+              <div class="absolute -bottom-6 -right-6 text-slate-100 text-8xl pointer-events-none group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-tags"></i>
+              </div>
+            </div>
+
+          </section>
+
+        </main>
+
+        <!-- Admin Footer -->
+        <%- include('partials/footer') %>
+
+      </div>
+
+    </div>
+
+    <!-- Admin Client Scripts -->
+    <%- include('partials/footercdns') %>
+
+  </body>
+</html>
+

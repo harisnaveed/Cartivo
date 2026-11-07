@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Add Category | Cartivo Admin Portal</title>
+    <%- include('../partials/headcdns') %>
+  </head>
+
+  <body class="admin-body selection:bg-amber-100 selection:text-amber-900">
+
+    <div class="admin-shell">
+      
+      <!-- Admin Sidebar Navigation -->
+      <%- include('../partials/sidebar', { currentPage: 'categories', currentSubPage: 'create' }) %>
+
+      <!-- Main Layout Wrapper -->
+      <div class="admin-main-wrapper">
+        
+        <!-- Admin Top Navigation Bar -->
+        <%- include('../partials/header', { title: 'Add Category' }) %>
+
+        <!-- Content Canvas -->
+        <main class="admin-content">
+
+          <!-- Page Heading -->
+          <section class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 sm:p-8 bg-white/85 backdrop-blur-md rounded-3xl border border-slate-200/80 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.03)] mb-8">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/90 border border-slate-200/60 text-[11px] font-semibold text-slate-600 mb-2 tracking-wide uppercase">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                CATEGORIES / CREATE
+              </div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                Add a new category.
+              </h1>
+              <p class="text-slate-500 text-xs sm:text-sm mt-1">
+                Define the department name, assign a FontAwesome icon, and configure visibility.
+              </p>
+            </div>
+
+            <a
+              href="/admin/categories"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-all self-start sm:self-auto"
+            >
+              <i class="fa-solid fa-arrow-left text-[10px]"></i>
+              <span>Back to Categories</span>
+            </a>
+          </section>
+
+          <!-- Form Card -->
+          <div class="max-w-2xl mx-auto">
+            <form action="/admin/categories" method="POST" class="admin-card p-6 sm:p-10 space-y-6">
+
+              <!-- Category Name -->
+              <div>
+                <label for="name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                  Category Name <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  placeholder="e.g. Smart Watches, Audio Gear..."
+                  class="w-full px-4 py-3 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all bg-white"
+                />
+                <p class="text-[11px] text-slate-400 mt-1.5">
+                  A URL-friendly slug will be automatically created from this name.
+                </p>
+              </div>
+
+              <!-- Icon Class with Live Preview -->
+              <div>
+                <label for="category-icon-input" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                  FontAwesome Icon Class <span class="text-rose-500">*</span>
+                </label>
+                
+                <div class="flex items-center gap-3">
+                  <!-- Live Preview Box -->
+                  <div class="icon-preview-box shrink-0" title="Live Icon Preview">
+                    <i id="category-icon-preview" class="fa-solid fa-shapes"></i>
+                  </div>
+
+                  <!-- Input -->
+                  <div class="flex-1">
+                    <input
+                      type="text"
+                      id="category-icon-input"
+                      name="icon"
+                      required
+                      placeholder="e.g. fa-solid fa-laptop"
+                      class="w-full px-4 py-3 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all bg-white font-mono"
+                    />
+                  </div>
+                </div>
+
+                <!-- Suggestion Chips & Device Palette -->
+                <div class="mt-4 p-4 rounded-2xl bg-slate-50/80 border border-slate-200/80 space-y-3">
+                  
+                  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/60 pb-2.5">
+                    <div>
+                      <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-shapes text-amber-500 text-xs"></i>
+                        <span>Device & Hardware Icon Catalog</span>
+                      </span>
+                      <span class="text-[11px] text-slate-400">Click any icon to assign it instantly</span>
+                    </div>
+
+                    <!-- Quick search filter for icons -->
+                    <div class="w-full sm:w-48 bg-white px-3 py-1.5 rounded-xl border border-slate-200 flex items-center gap-2 focus-within:ring-2 focus-within:ring-slate-900/10">
+                      <i class="fa-solid fa-magnifying-glass text-slate-400 text-[10px]"></i>
+                      <input
+                        type="text"
+                        id="icon-search-filter"
+                        placeholder="Search devices..."
+                        class="w-full text-xs text-slate-800 placeholder-slate-400 bg-transparent focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Category Filter Pills -->
+                  <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] font-semibold text-slate-500">
+                    <button type="button" class="icon-tab-btn px-2.5 py-1 rounded-lg bg-slate-900 text-white transition-colors shrink-0" data-group="all">All</button>
+                    <button type="button" class="icon-tab-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors shrink-0" data-group="computing">Computers</button>
+                    <button type="button" class="icon-tab-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors shrink-0" data-group="mobile">Mobile & Watch</button>
+                    <button type="button" class="icon-tab-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors shrink-0" data-group="audio">Audio & Sound</button>
+                    <button type="button" class="icon-tab-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors shrink-0" data-group="gaming">Gaming & Video</button>
+                    <button type="button" class="icon-tab-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors shrink-0" data-group="peripherals">Hardware & Parts</button>
+                    <button type="button" class="icon-tab-btn px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors shrink-0" data-group="smart">Smart Home & IoT</button>
+                  </div>
+
+                  <!-- Chips Grid -->
+                  <div class="flex items-center gap-1.5 flex-wrap max-h-56 overflow-y-auto pr-1">
+                    <!-- Computing -->
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-laptop" data-group="computing">
+                      <i class="fa-solid fa-laptop text-xs"></i> <span>Laptop</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-desktop" data-group="computing">
+                      <i class="fa-solid fa-desktop text-xs"></i> <span>Desktop PC</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-computer" data-group="computing">
+                      <i class="fa-solid fa-computer text-xs"></i> <span>Workstation</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-display" data-group="computing">
+                      <i class="fa-solid fa-display text-xs"></i> <span>Monitor</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-tablet-screen-button" data-group="computing">
+                      <i class="fa-solid fa-tablet-screen-button text-xs"></i> <span>Tablet / iPad</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-server" data-group="computing">
+                      <i class="fa-solid fa-server text-xs"></i> <span>Server</span>
+                    </button>
+
+                    <!-- Mobile & Wearables -->
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-mobile-screen" data-group="mobile">
+                      <i class="fa-solid fa-mobile-screen text-xs"></i> <span>Smartphone</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-clock" data-group="mobile">
+                      <i class="fa-solid fa-clock text-xs"></i> <span>Smartwatch</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-sim-card" data-group="mobile">
+                      <i class="fa-solid fa-sim-card text-xs"></i> <span>Cellular / SIM</span>
+                    </button>
+
+                    <!-- Audio & Sound -->
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-headphones" data-group="audio">
+                      <i class="fa-solid fa-headphones text-xs"></i> <span>Headphones</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-headset" data-group="audio">
+                      <i class="fa-solid fa-headset text-xs"></i> <span>Gaming Headset</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-volume-high" data-group="audio">
+                      <i class="fa-solid fa-volume-high text-xs"></i> <span>Speaker</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-microphone" data-group="audio">
+                      <i class="fa-solid fa-microphone text-xs"></i> <span>Microphone</span>
+                    </button>
+
+                    <!-- Gaming & Video -->
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-gamepad" data-group="gaming">
+                      <i class="fa-solid fa-gamepad text-xs"></i> <span>Gaming Console</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-vr-cardboard" data-group="gaming">
+                      <i class="fa-solid fa-vr-cardboard text-xs"></i> <span>VR Headset</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-tv" data-group="gaming">
+                      <i class="fa-solid fa-tv text-xs"></i> <span>Smart TV</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-camera" data-group="gaming">
+                      <i class="fa-solid fa-camera text-xs"></i> <span>Camera / DSLR</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-video" data-group="gaming">
+                      <i class="fa-solid fa-video text-xs"></i> <span>Video / Cam</span>
+                    </button>
+
+                    <!-- Hardware & Parts -->
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-keyboard" data-group="peripherals">
+                      <i class="fa-solid fa-keyboard text-xs"></i> <span>Keyboard</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-computer-mouse" data-group="peripherals">
+                      <i class="fa-solid fa-computer-mouse text-xs"></i> <span>Mouse</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-hard-drive" data-group="peripherals">
+                      <i class="fa-solid fa-hard-drive text-xs"></i> <span>SSD / Storage</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-microchip" data-group="peripherals">
+                      <i class="fa-solid fa-microchip text-xs"></i> <span>CPU / Processor</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-memory" data-group="peripherals">
+                      <i class="fa-solid fa-memory text-xs"></i> <span>RAM Memory</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-print" data-group="peripherals">
+                      <i class="fa-solid fa-print text-xs"></i> <span>Printer</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-plug" data-group="peripherals">
+                      <i class="fa-solid fa-plug text-xs"></i> <span>Cables / Charger</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-battery-full" data-group="peripherals">
+                      <i class="fa-solid fa-battery-full text-xs"></i> <span>Power Bank</span>
+                    </button>
+
+                    <!-- Smart Home & IoT -->
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-wifi" data-group="smart">
+                      <i class="fa-solid fa-wifi text-xs"></i> <span>Wi-Fi / Router</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-network-wired" data-group="smart">
+                      <i class="fa-solid fa-network-wired text-xs"></i> <span>LAN / Ethernet</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-house-signal" data-group="smart">
+                      <i class="fa-solid fa-house-signal text-xs"></i> <span>Smart Home</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-lightbulb" data-group="smart">
+                      <i class="fa-solid fa-lightbulb text-xs"></i> <span>Smart Bulb</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-robot" data-group="smart">
+                      <i class="fa-solid fa-robot text-xs"></i> <span>Robotics</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-blender" data-group="smart">
+                      <i class="fa-solid fa-blender text-xs"></i> <span>Appliances</span>
+                    </button>
+                    <button type="button" class="icon-suggestion-chip px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold transition-all flex items-center gap-1.5" data-icon="fa-solid fa-fan" data-group="smart">
+                      <i class="fa-solid fa-fan text-xs"></i> <span>Cooling / Fan</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Status -->
+              <div>
+                <label for="status" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                  Status
+                </label>
+                <select
+                  id="status"
+                  name="status"
+                  class="w-full px-4 py-3 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all bg-white"
+                >
+                  <option value="active" selected>Active (Visible in catalog)</option>
+                  <option value="inactive">Inactive (Hidden from customers)</option>
+                </select>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+                <a
+                  href="/admin/categories"
+                  class="px-5 py-2.5 rounded-full border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50 transition-colors"
+                >
+                  Cancel
+                </a>
+                <button
+                  type="submit"
+                  class="px-6 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-md hover:-translate-y-0.5 transition-all"
+                >
+                  Save Category
+                </button>
+              </div>
+
+            </form>
+          </div>
+
+        </main>
+
+        <!-- Admin Footer -->
+        <%- include('../partials/footer') %>
+
+      </div>
+
+    </div>
+
+    <!-- Admin Client Scripts -->
+    <%- include('../partials/footercdns') %>
+
+  </body>
+</html>

@@ -1,0 +1,140 @@
+<!-- Mobile Backdrop Overlay -->
+<div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+<!-- Admin Sidebar -->
+<aside id="admin-sidebar" class="admin-sidebar">
+  
+  <!-- Sidebar Header / Brand Logo -->
+  <div class="h-[70px] px-6 border-b border-slate-100 flex items-center justify-between">
+    <a href="/admin/dashboard" class="flex items-center gap-2.5 group">
+      <div class="w-8 h-8 rounded-xl bg-slate-900 flex items-center justify-center text-white font-extrabold text-sm shadow-sm group-hover:scale-105 transition-transform">
+        <span class="text-amber-400">C</span>
+      </div>
+      <div>
+        <div class="flex items-center gap-1.5">
+          <span class="font-extrabold text-base tracking-tight text-slate-900">Cartivo</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+        </div>
+        <span class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block -mt-1">Back-Office</span>
+      </div>
+    </a>
+
+    <!-- Mobile Close Button -->
+    <button
+      id="sidebar-close-btn"
+      class="lg:hidden w-8 h-8 rounded-lg bg-slate-100 text-slate-500 hover:text-slate-900 hover:bg-slate-200 flex items-center justify-center transition-colors"
+      aria-label="Close Sidebar"
+    >
+      <i class="fa-solid fa-xmark text-sm"></i>
+    </button>
+  </div>
+
+  <!-- Navigation Menu Container -->
+  <div class="flex-1 overflow-y-auto px-4 py-6 space-y-6">
+
+    <!-- Section: Overview -->
+    <div>
+      <div class="px-3 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+        Overview
+      </div>
+      <nav class="space-y-1">
+        <!-- Dashboard -->
+        <a
+          href="/admin/dashboard"
+          class="admin-nav-item <%= (typeof currentPage !== 'undefined' && currentPage === 'dashboard') || (typeof currentPath !== 'undefined' && (currentPath === '/admin' || currentPath === '/admin/dashboard')) ? 'active' : '' %>"
+        >
+          <i class="fa-solid fa-gauge nav-icon text-sm"></i>
+          <span>Dashboard</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Section: Catalog Management -->
+    <div>
+      <div class="px-3 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+        Inventory Management
+      </div>
+      <nav class="space-y-1">
+        <!-- Products -->
+        <a
+          href="/admin/products"
+          class="admin-nav-item <%= (typeof currentPage !== 'undefined' && currentPage === 'products' && (typeof currentSubPage === 'undefined' || currentSubPage !== 'create')) || (typeof currentPath !== 'undefined' && currentPath === '/admin/products') ? 'active' : '' %>"
+        >
+          <i class="fa-solid fa-boxes-stacked nav-icon text-sm"></i>
+          <span>Products</span>
+        </a>
+
+        <!-- Add Product -->
+        <a
+          href="/admin/products/create"
+          class="admin-nav-item <%= (typeof currentSubPage !== 'undefined' && currentSubPage === 'create' && currentPage === 'products') || (typeof currentPath !== 'undefined' && currentPath === '/admin/products/create') ? 'active' : '' %>"
+        >
+          <i class="fa-solid fa-plus-circle nav-icon text-sm"></i>
+          <span>Add Product</span>
+        </a>
+
+        <!-- Categories -->
+        <a
+          href="/admin/categories"
+          class="admin-nav-item <%= (typeof currentPage !== 'undefined' && currentPage === 'categories' && (typeof currentSubPage === 'undefined' || currentSubPage !== 'create')) || (typeof currentPath !== 'undefined' && currentPath === '/admin/categories') ? 'active' : '' %>"
+        >
+          <i class="fa-solid fa-tags nav-icon text-sm"></i>
+          <span>Categories</span>
+        </a>
+
+        <!-- Add Category -->
+        <a
+          href="/admin/categories/create"
+          class="admin-nav-item <%= (typeof currentSubPage !== 'undefined' && currentSubPage === 'create' && currentPage === 'categories') || (typeof currentPath !== 'undefined' && currentPath === '/admin/categories/create') ? 'active' : '' %>"
+        >
+          <i class="fa-solid fa-folder-plus nav-icon text-sm"></i>
+          <span>Add Category</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Section: Quick Links -->
+    <div>
+      <div class="px-3 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+        External
+      </div>
+      <nav class="space-y-1">
+        <a
+          href="/"
+          target="_blank"
+          class="admin-nav-item text-slate-500 hover:text-blue-600 hover:bg-blue-50/60"
+        >
+          <i class="fa-solid fa-store nav-icon text-sm"></i>
+          <span>Live Storefront ↗</span>
+        </a>
+        <a
+          href="/shop"
+          target="_blank"
+          class="admin-nav-item text-slate-500 hover:text-blue-600 hover:bg-blue-50/60"
+        >
+          <i class="fa-solid fa-bag-shopping nav-icon text-sm"></i>
+          <span>Store Catalog ↗</span>
+        </a>
+      </nav>
+    </div>
+
+  </div>
+
+  <!-- Sidebar Footer Widget -->
+  <div class="p-4 border-t border-slate-100 bg-slate-50/60">
+    <div class="flex items-center gap-3 p-2.5 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
+      <div class="w-9 h-9 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-xs relative">
+        <span>A</span>
+        <span class="w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-white absolute -top-0.5 -right-0.5"></span>
+      </div>
+      <div class="flex-1 min-w-0">
+        <strong class="text-xs font-bold text-slate-900 truncate block">Admin Portal</strong>
+        <span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Live System
+        </span>
+      </div>
+    </div>
+  </div>
+
+</aside>
+

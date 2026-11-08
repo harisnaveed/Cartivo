@@ -8,16 +8,20 @@
     "dev": "nodemon server.js",
     "start": "node server.js",
     "seed:categories": "node seeders/categorySeeder.js",
-    "seed:products": "node seeders/productSeeder.js"
+    "seed:products": "node seeders/productSeeder.js",
+    "seed:admins": "node seeders/adminUserSeeder.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "connect-mongo": "^6.0.0",
     "dotenv": "^18.0.9",
     "ejs": "^7.0.2",
     "express": "^5.3.0",
+    "express-session": "^1.19.0",
     "mongoose": "^9.11.4",
     "multer": "^2.5.0",
     "nodemon": "^3.1.14",

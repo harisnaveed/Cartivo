@@ -115,6 +115,13 @@
           <i class="fa-solid fa-bag-shopping nav-icon text-sm"></i>
           <span>Store Catalog ↗</span>
         </a>
+        <a
+          href="/admin/logout"
+          class="admin-nav-item text-rose-600 hover:bg-rose-50 hover:text-rose-700"
+        >
+          <i class="fa-solid fa-arrow-right-from-bracket nav-icon text-sm text-rose-500"></i>
+          <span>Log Out</span>
+        </a>
       </nav>
     </div>
 
@@ -123,14 +130,17 @@
   <!-- Sidebar Footer Widget -->
   <div class="p-4 border-t border-slate-100 bg-slate-50/60">
     <div class="flex items-center gap-3 p-2.5 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
-      <div class="w-9 h-9 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-xs relative">
-        <span>A</span>
+      <div class="w-9 h-9 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-xs relative uppercase">
+        <span><%= (typeof currentAdmin !== 'undefined' && currentAdmin && currentAdmin.name) ? currentAdmin.name.charAt(0) : 'A' %></span>
         <span class="w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-white absolute -top-0.5 -right-0.5"></span>
       </div>
       <div class="flex-1 min-w-0">
-        <strong class="text-xs font-bold text-slate-900 truncate block">Admin Portal</strong>
-        <span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Live System
+        <strong class="text-xs font-bold text-slate-900 truncate block">
+          <%= (typeof currentAdmin !== 'undefined' && currentAdmin && currentAdmin.name) ? currentAdmin.name : 'Admin Portal' %>
+        </strong>
+        <span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1 capitalize">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          <%= (typeof currentAdmin !== 'undefined' && currentAdmin && currentAdmin.role) ? currentAdmin.role : 'Online' %>
         </span>
       </div>
     </div>

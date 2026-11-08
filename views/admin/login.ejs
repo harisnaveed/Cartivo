@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Admin Login | Cartivo Back-Office</title>
+    <%- include('partials/headcdns') %>
+  </head>
+
+  <body class="admin-body min-h-screen relative overflow-x-hidden selection:bg-amber-100 selection:text-amber-900 flex flex-col justify-between">
+
+    <!-- Ambient 3D Floating Clay Elements (Zero image files, pure CSS) -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <div class="absolute -top-12 -left-12 w-36 h-28 sm:w-52 sm:h-36 clay-torus animate-float-slow opacity-80 rotate-12"></div>
+      <div class="absolute top-24 right-16 w-10 h-10 rounded-full bg-amber-400/50 blur-[2px] animate-float-gentle"></div>
+      <div class="absolute top-[45%] -left-16 w-40 h-40 clay-sphere-blue animate-float-drift opacity-75"></div>
+      <div class="absolute top-[35%] -right-12 w-28 h-44 clay-pill-amber animate-float-slow opacity-80 rotate-45"></div>
+      <div class="absolute -bottom-16 left-1/3 w-48 h-36 clay-torus animate-float-gentle opacity-60 -rotate-12"></div>
+    </div>
+
+    <!-- Top Minimal Navigation -->
+    <header class="relative z-10 w-full max-w-7xl mx-auto px-6 pt-6 flex items-center justify-between">
+      <!-- Brand Logo -->
+      <a href="/" class="flex items-center gap-2.5 group" title="Return to Storefront">
+        <div class="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center text-white font-extrabold text-sm shadow-sm group-hover:scale-105 transition-transform">
+          <span class="text-amber-400">C</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="font-extrabold text-lg tracking-tight text-slate-900">Cartivo</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+        </div>
+      </a>
+
+      <!-- Quick Storefront Link -->
+      <a
+        href="/"
+        class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-slate-200/80 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-white transition-all shadow-2xs"
+      >
+        <i class="fa-solid fa-arrow-left text-[10px]"></i>
+        <span>Live Storefront</span>
+      </a>
+    </header>
+
+    <!-- Main Content: Login Form Card -->
+    <main class="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 py-12">
+      <div class="w-full max-w-md">
+
+        <!-- Card Container -->
+        <div class="bg-white/90 backdrop-blur-md rounded-3xl border border-slate-200/80 shadow-[0_20px_50px_-10px_rgba(15,23,42,0.06)] p-7 sm:p-10 transition-all">
+          
+          <!-- Card Header -->
+          <div class="text-center mb-8">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/90 border border-slate-200/60 text-[11px] font-semibold text-slate-600 mb-4 tracking-wide uppercase">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              BACK-OFFICE PORTAL
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Sign in to Cartivo.
+            </h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-1.5">
+              Enter your admin credentials to access inventory and store controls.
+            </p>
+          </div>
+
+          <!-- Error Notification Banner -->
+          <% if (typeof error !== 'undefined' && error) { %>
+            <div class="mb-5 p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold flex items-center gap-2.5">
+              <i class="fa-solid fa-circle-exclamation text-rose-500 text-sm"></i>
+              <span><%= error %></span>
+            </div>
+          <% } %>
+
+          <!-- Login Form -->
+          <form action="/admin/login" method="POST" class="space-y-5">
+
+            <!-- Email Input -->
+            <div>
+              <label for="admin-email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                Email Address
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+                  <i class="fa-regular fa-envelope text-xs"></i>
+                </span>
+                <input
+                  type="email"
+                  id="admin-email"
+                  name="email"
+                  required
+                  placeholder="admin@cartivo.com"
+                  value="<%= typeof email !== 'undefined' ? email : '' %>"
+                  class="w-full pl-10 pr-4 py-3 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all bg-white"
+                />
+              </div>
+            </div>
+
+            <!-- Password Input -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label for="admin-password" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  Password
+                </label>
+                <a
+                  href="#"
+                  class="text-[11px] font-semibold text-slate-500 hover:text-slate-900 transition-colors"
+                  onclick="alert('Password recovery is disabled in UI preview mode.'); return false;"
+                >
+                  Forgot password?
+                </a>
+              </div>
+
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+                  <i class="fa-solid fa-lock text-xs"></i>
+                </span>
+                <input
+                  type="password"
+                  id="admin-password"
+                  name="password"
+                  required
+                  placeholder="••••••••••••"
+                  class="w-full pl-10 pr-11 py-3 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all bg-white"
+                />
+                <!-- Toggle Password Visibility -->
+                <button
+                  type="button"
+                  id="toggle-password-btn"
+                  class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 transition-colors"
+                  aria-label="Toggle password visibility"
+                >
+                  <i id="toggle-password-icon" class="fa-regular fa-eye text-xs"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Remember Me & Session Duration -->
+            <div class="flex items-center justify-between pt-1">
+              <label class="inline-flex items-center gap-2 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  name="remember"
+                  checked
+                  class="w-4 h-4 rounded-md border-slate-300 text-slate-900 focus:ring-0 focus:ring-offset-0 cursor-pointer accent-slate-900"
+                />
+                <span class="text-xs text-slate-600 font-medium">Remember this session</span>
+              </label>
+
+              <span class="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                SSL Encrypted
+              </span>
+            </div>
+
+            <!-- Submit Button (Primary Dark Capsule) -->
+            <div class="pt-2">
+              <button
+                type="submit"
+                class="w-full py-3.5 px-6 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-bold shadow-[0_4px_14px_rgba(17,24,39,0.2)] hover:shadow-[0_6px_20px_rgba(17,24,39,0.3)] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2"
+              >
+                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                <span>Sign In to Dashboard</span>
+                <i class="fa-solid fa-arrow-right text-[10px] ml-1"></i>
+              </button>
+            </div>
+
+          </form>
+
+          <!-- Security Footer Pill -->
+          <div class="mt-8 pt-6 border-t border-slate-100 flex items-center justify-center text-center">
+            <p class="text-[11px] text-slate-400 flex items-center gap-1.5">
+              <i class="fa-solid fa-shield-halved text-slate-400 text-xs"></i>
+              <span>Restricted access • Authorized personnel only</span>
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Help Info Note -->
+        <div class="mt-6 text-center text-xs text-slate-400">
+          <span>Need administrative access? Contact </span>
+          <a href="mailto:support@cartivo.com" class="text-slate-600 font-semibold hover:underline">
+            system administrators
+          </a>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Page Minimal Footer -->
+    <footer class="relative z-10 py-5 px-6 text-center text-xs text-slate-400">
+      <div class="flex items-center justify-center gap-2">
+        <span class="font-extrabold text-slate-700 tracking-tight">Cartivo</span>
+        <span>•</span>
+        <span>Back-Office Administration Engine</span>
+        <span>•</span>
+        <span>v1.0.0</span>
+      </div>
+    </footer>
+
+    <!-- Admin Client Scripts -->
+    <%- include('partials/footercdns') %>
+
+    <!-- Inline Script for Password Visibility Toggle -->
+    <script>
+      (function() {
+        const toggleBtn = document.getElementById('toggle-password-btn');
+        const passwordInput = document.getElementById('admin-password');
+        const toggleIcon = document.getElementById('toggle-password-icon');
+
+        if (toggleBtn && passwordInput && toggleIcon) {
+          toggleBtn.addEventListener('click', function() {
+            const isPassword = passwordInput.getAttribute('type') === 'password';
+            passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+            toggleIcon.className = isPassword ? 'fa-regular fa-eye-slash text-xs' : 'fa-regular fa-eye text-xs';
+          });
+        }
+      })();
+    </script>
+
+  </body>
+</html>
+

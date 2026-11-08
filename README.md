@@ -81,7 +81,7 @@ flowchart TD
 
     subgraph Server["Express 5 Web Server (app.js & server.js)"]
         Router{"Route Dispatcher"}
-        SessionMiddleware["Session & Cookie Engine (express-session + connect-mongo)"]
+        SessionMiddleware["Session Engine (express-session + connect-mongo)"]
         AuthMiddleware["Admin Auth Guard (adminAuth.js)"]
         Multer["Upload Engine (config/multer.js)"]
         
@@ -99,40 +99,40 @@ flowchart TD
     end
 
     subgraph DataStorage["Persistence Layer"]
-        MongoDB[("MongoDB Database (cartivo)")]
+        MongoDB[("MongoDB Database")]
         SessionCol[("MongoDB: sessions collection")]
-        Uploads[("public/uploads/ (Local Product Images)")]
-        LeadsFile[("data/leads.json (Contact Leads)")]
+        Uploads[("public/uploads/ - Local Images")]
+        LeadsFile[("data/leads.json - Contact Leads")]
     end
 
     subgraph ViewsLayer["Presentation Layer (EJS)"]
-        AdminViews["Admin Views (views/admin/)<br/>dashboard, login, products, categories"]
-        StoreViews["Storefront Views (views/)<br/>home, shop, product-details, contact, about, 404"]
+        AdminViews["Admin Views (views/admin)"]
+        StoreViews["Storefront Views (views)"]
     end
 
-    Client -->|HTTP Requests| SessionMiddleware
-    SessionMiddleware <-->|Read / Write Sessions| SessionCol
+    Client -->|"HTTP Requests"| SessionMiddleware
+    SessionMiddleware <-->|"Read / Write Sessions"| SessionCol
     SessionMiddleware --> Router
 
-    Router -->|/admin/login| AdminCtrl
-    Router -->|/admin/* (Protected)| AuthMiddleware
-    AuthMiddleware -->|Authenticated| AdminCtrl
-    AuthMiddleware -->|Authenticated| AdminProdCtrl
-    AuthMiddleware -->|Authenticated| AdminCatCtrl
-    AuthMiddleware -->|Unauthenticated Guest| RedirectLogin["302 Redirect to /admin/login"]
+    Router -->|"/admin/login"| AdminCtrl
+    Router -->|"Protected /admin/*"| AuthMiddleware
+    AuthMiddleware -->|"Authenticated"| AdminCtrl
+    AuthMiddleware -->|"Authenticated"| AdminProdCtrl
+    AuthMiddleware -->|"Authenticated"| AdminCatCtrl
+    AuthMiddleware -->|"Unauthenticated Guest"| RedirectLogin["302 Redirect to /admin/login"]
 
-    Router -->|Public Storefront Routes| PublicProd
-    Router -->|Contact Form POST| PublicContact
+    Router -->|"Public Storefront Routes"| PublicProd
+    Router -->|"Contact Form POST"| PublicContact
 
-    AdminProdCtrl -->|Multipart Upload| Multer
-    Multer -->|Store File| Uploads
-    AdminProdCtrl -->|Unlink Image on Delete| Uploads
+    AdminProdCtrl -->|"Multipart Upload"| Multer
+    Multer -->|"Store File"| Uploads
+    AdminProdCtrl -->|"Unlink Image on Delete"| Uploads
 
-    AdminCtrl <-->|Mongoose ODM| MongoDB
-    AdminProdCtrl <-->|Mongoose ODM| MongoDB
-    AdminCatCtrl <-->|Mongoose ODM| MongoDB
-    PublicProd <-->|Mongoose ODM| MongoDB
-    PublicContact -->|Append Lead| LeadsFile
+    AdminCtrl <-->|"Mongoose ODM"| MongoDB
+    AdminProdCtrl <-->|"Mongoose ODM"| MongoDB
+    AdminCatCtrl <-->|"Mongoose ODM"| MongoDB
+    PublicProd <-->|"Mongoose ODM"| MongoDB
+    PublicContact -->|"Append Lead"| LeadsFile
 
     AdminCtrl --> AdminViews
     AdminProdCtrl --> AdminViews

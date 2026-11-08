@@ -210,6 +210,7 @@ Cartivo/
 │   ├── js/
 │   │   ├── admin/
 │   │   │   └── admin.js                  # Admin client script (sidebar toggle, live search, icon picker)
+│   │   ├── cart.js                       # Cart page engine (dynamic items, steppers, totals, checkout)
 │   │   └── shop.js                       # Storefront client script (cart localStorage, modal, slider)
 │   └── uploads/                          # Target storage directory for uploaded product images
 │
@@ -252,6 +253,7 @@ Cartivo/
 │   │
 │   ├── 404.ejs                           # Branded 404 error page
 │   ├── about.ejs                         # About Cartivo platform showcase
+│   ├── cart.ejs                          # Dedicated customer cart & order review page
 │   ├── contact.ejs                       # Dedicated contact inquiry page
 │   ├── home.ejs                          # Storefront landing page with hero, slider, and products
 │   ├── product-details.ejs               # Two-column single product specification showcase
@@ -277,6 +279,7 @@ Cartivo/
 | :--- | :--- | :--- | :---: | :--- | :--- |
 | `GET` | `/` | `getHomeProducts` | Public | Homepage with hero, category slider, and live items | `views/home.ejs` |
 | `GET` | `/shop` | `getShopProducts` | Public | Catalog with `?search=` and `?category=` filters | `views/shop.ejs` |
+| `GET` | `/cart` | `getCartPage` | Public | Shopping bag with item quantities, totals, and checkout | `views/cart.ejs` |
 | `GET` | `/product/:slug/view` | `getProductDetails` | Public | Detailed showcase for a single product by slug | `views/product-details.ejs` |
 | `GET` | `/about` | Inline handler | Public | About Cartivo company & platform information | `views/about.ejs` |
 | `GET` | `/contact` | `getContact` | Public | Contact inquiry page and office location | `views/contact.ejs` |

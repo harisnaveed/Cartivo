@@ -6,6 +6,7 @@ import {
   deleteProduct,
   getShopProducts,
   getHomeProducts,
+  getCartPage,
 } from "../controllers/productController.js";
 import { getContact, submitContact } from "../controllers/contactController.js";
 import { getAddProductPage } from "../controllers/categoryController.js";
@@ -33,6 +34,10 @@ router.get("/product/:slug/view", getProductDetails);
 
 // all active products for shop page
 router.get("/shop", getShopProducts);
+
+// Shopping cart page
+router.get("/cart", getCartPage);
+
 
 // 404 - Always last
 router.use((req, res) => {

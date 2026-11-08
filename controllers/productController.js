@@ -233,3 +233,12 @@ export const getHomeProducts = async (req, res) => {
     });
   }
 };
+
+// GET: Display Shopping Cart Page
+export const getCartPage = (req, res) => {
+  res.render("cart", {
+    title: "My Cart | Cartivo",
+    currentPage: "cart",
+  });
+};
+

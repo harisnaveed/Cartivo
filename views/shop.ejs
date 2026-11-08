@@ -36,17 +36,22 @@
                 <p class="text-slate-500 text-xs sm:text-sm mt-1">Discover quality verified products, all in one unified marketplace.</p>
             </div>
 
-            <!-- Cart Summary Badge Pill -->
-            <div class="flex items-center gap-3.5 bg-slate-50 px-5 py-3 rounded-full border border-slate-200/80 shadow-sm self-start sm:self-auto">
-                <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center text-sm relative">
+            <!-- Cart Summary Badge Pill Link -->
+            <a
+                href="/cart"
+                class="group flex items-center gap-3.5 bg-slate-50 hover:bg-slate-100/90 px-5 py-3 rounded-full border border-slate-200/80 hover:border-slate-300 shadow-sm transition-all duration-200 self-start sm:self-auto hover:-translate-y-0.5"
+                title="View Shopping Cart"
+            >
+                <div class="w-10 h-10 rounded-full bg-slate-900 group-hover:bg-slate-800 text-white flex items-center justify-center text-sm relative transition-colors">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-amber-500 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white">0</span>
                 </div>
                 <div>
-                    <strong class="text-xs font-bold text-slate-900 block">My Cart</strong>
+                    <strong class="text-xs font-bold text-slate-900 group-hover:text-amber-600 transition-colors block">My Cart</strong>
                     <small id="cart-label" class="text-[11px] text-slate-500">0 items added</small>
                 </div>
-            </div>
+                <i class="fa-solid fa-arrow-right text-[11px] text-slate-400 group-hover:text-slate-700 group-hover:translate-x-0.5 transition-all ml-1"></i>
+            </a>
         </section>
 
         <!-- Shop Toolbar: Count & Search -->
@@ -84,7 +89,7 @@
                     </div>
                     <h3 class="text-base font-bold text-slate-800 mb-1">No products available</h3>
                     <p class="text-xs text-slate-500 max-w-sm mx-auto mb-6">New products will appear here when they are added to the inventory collection.</p>
-                    <a href="/product/new" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-md transition-all">
+                    <a href="/admin/products/create" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-md transition-all">
                         <i class="fa-solid fa-plus text-[10px]"></i>
                         <span>Add New Product</span>
                     </a>

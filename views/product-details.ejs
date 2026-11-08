@@ -135,9 +135,18 @@
                         View in Shop
                     </a>
 
-                    <a href="/product/new" class="px-5 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-md transition-all hover:-translate-y-0.5">
-                        + Add Another Product
-                    </a>
+                    <button
+                        type="button"
+                        class="add-cart-btn px-6 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 disabled:bg-slate-300 text-white text-xs font-semibold shadow-md transition-all hover:-translate-y-0.5 inline-flex items-center gap-2"
+                        data-id="<%= product._id %>"
+                        data-name="<%= (product.name || '').replace(/"/g, '&quot;') %>"
+                        data-price="<%= product.price %>"
+                        data-image="<%= product.image || '' %>"
+                        <%= product.stock <= 0 ? 'disabled' : '' %>
+                    >
+                        <i class="fa-solid fa-cart-plus text-xs"></i>
+                        <span><%= product.stock > 0 ? 'Add to Cart' : 'Sold Out' %></span>
+                    </button>
                 </div>
 
             </div>

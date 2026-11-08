@@ -29,10 +29,10 @@
       class="quick-view-btn absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md text-slate-700 hover:text-slate-900 hover:bg-white flex items-center justify-center shadow-sm transition-all"
       title="Quick View"
       data-id="<%= product._id %>"
-      data-name="<%= product.name %>"
+      data-name="<%= (product.name || '').replace(/"/g, '&quot;') %>"
       data-price="<%= product.price %>"
-      data-category="<%= product.category_id?.name %>"
-      data-description="<%= product.description || '' %>"
+      data-category="<%= product.category_id?.name || 'General' %>"
+      data-description="<%= (product.description || '').replace(/"/g, '&quot;') %>"
       data-image="<%= product.image || '' %>"
       data-stock="<%= product.stock %>"
     >
@@ -72,7 +72,7 @@
         type="button"
         class="add-cart-btn px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 disabled:bg-slate-300 text-white text-xs font-semibold shadow-sm transition-all inline-flex items-center gap-1.5"
         data-id="<%= product._id %>"
-        data-name="<%= product.name %>"
+        data-name="<%= (product.name || '').replace(/"/g, '&quot;') %>"
         data-price="<%= product.price %>"
         data-image="<%= product.image || '' %>"
         <%= product.stock <= 0 ? 'disabled' : '' %>

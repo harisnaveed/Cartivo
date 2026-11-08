@@ -2,32 +2,47 @@
 // CARTIVO STOREFRONT & MODAL ENGINE
 // =================================
 
-let cart = JSON.parse(localStorage.getItem("cartivoCart")) || [];
+// Safely retrieve latest cart from localStorage
+function getCart() {
+  try {
+    return JSON.parse(localStorage.getItem("cartivoCart")) || [];
+  } catch (err) {
+    console.error("Cart retrieval error:", err);
+    return [];
+  }
+}
 
-// Update cart counter in DOM and localStorage
+// Update cart counter in DOM (reads from localStorage, does not overwrite)
 function updateCartCounter() {
-  const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+  const currentCart = getCart();
+  const totalItems = currentCart.reduce((total, item) => total + (Number(item.quantity) || 1), 0);
 
   const cartCount = document.getElementById("cart-count");
   const cartLabel = document.getElementById("cart-label");
+  const headerCartCount = document.getElementById("header-cart-count");
 
   if (cartCount) cartCount.textContent = totalItems;
   if (cartLabel) cartLabel.textContent = `${totalItems} items added`;
-
-  localStorage.setItem("cartivoCart", JSON.stringify(cart));
+  if (headerCartCount) headerCartCount.textContent = totalItems;
 }
 
-// Add an item to cart
+// Initial count sync across pages and storage events
+document.addEventListener("DOMContentLoaded", updateCartCounter);
+window.addEventListener("storage", updateCartCounter);
+
+
+// Add an item to cart (persists to localStorage, then updates counters)
 function addToCart(product) {
   if (!product || !product.id) return;
 
-  const existingProduct = cart.find((item) => item.id === product.id);
+  const currentCart = getCart();
+  const existingProduct = currentCart.find((item) => String(item.id) === String(product.id));
 
   if (existingProduct) {
-    existingProduct.quantity = (existingProduct.quantity || 1) + 1;
+    existingProduct.quantity = (Number(existingProduct.quantity) || 1) + 1;
   } else {
-    cart.push({
-      id: product.id,
+    currentCart.push({
+      id: String(product.id),
       name: product.name,
       price: Number(product.price) || 0,
       image: product.image || "",
@@ -35,6 +50,10 @@ function addToCart(product) {
     });
   }
 
+  // Save to localStorage FIRST
+  localStorage.setItem("cartivoCart", JSON.stringify(currentCart));
+
+  // Update counters across the page
   updateCartCounter();
 }
 
@@ -129,6 +148,7 @@ document.addEventListener("click", (e) => {
   const addCartBtn = e.target.closest(".add-cart-btn");
   if (addCartBtn) {
     e.preventDefault();
+    e.stopPropagation();
     const product = {
       id: addCartBtn.dataset.id,
       name: addCartBtn.dataset.name,

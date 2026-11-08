@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shopping Cart | Cartivo Marketplace</title>
+    <%- include('partials/headcdns') %>
+</head>
+
+<body class="relative overflow-x-hidden selection:bg-amber-100 selection:text-amber-900 bg-slate-50/50">
+
+    <!-- Ambient 3D Floating Clay Elements -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-10 -left-12 w-32 h-24 sm:w-44 sm:h-32 clay-torus animate-float-slow opacity-80 rotate-12"></div>
+        <div class="absolute top-24 right-12 w-8 h-8 rounded-full bg-amber-400/50 blur-[2px] animate-float-gentle"></div>
+        <div class="absolute top-[45%] -left-16 w-36 h-36 clay-sphere-blue animate-float-drift opacity-75"></div>
+        <div class="absolute top-[40%] -right-10 w-24 h-40 clay-pill-amber animate-float-slow opacity-80 rotate-45"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <div class="relative z-20">
+        <%- include('partials/header') %>
+    </div>
+
+    <!-- Main Content Canvas -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-10 pb-20">
+
+        <!-- Breadcrumb & Page Heading -->
+        <section class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 sm:p-8 bg-white/85 backdrop-blur-md rounded-3xl border border-slate-200/80 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.03)] mb-8">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/90 border border-slate-200/60 text-[11px] font-semibold text-slate-600 mb-2 tracking-wide uppercase">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                    CARTIVO / SHOPPING BAG
+                </div>
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                    Review your <span class="text-slate-800">order.</span>
+                </h1>
+                <p class="text-slate-500 text-xs sm:text-sm mt-1">
+                    Manage your selected products, review quantities, and proceed to secure checkout.
+                </p>
+            </div>
+
+            <a
+                href="/shop"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-all self-start sm:self-auto hover:-translate-x-0.5"
+            >
+                <i class="fa-solid fa-arrow-left text-[10px]"></i>
+                <span>Continue Shopping</span>
+            </a>
+        </section>
+
+        <!-- EMPTY CART STATE (Shown if 0 items) -->
+        <div id="empty-cart-state" class="hidden p-12 sm:p-16 text-center bg-white/85 backdrop-blur-md rounded-3xl border border-slate-200/80 shadow-xs max-w-xl mx-auto my-12">
+            <div class="w-20 h-20 mx-auto rounded-full bg-amber-50 border border-amber-100 text-amber-500 flex items-center justify-center text-3xl mb-5 shadow-xs">
+                <i class="fa-solid fa-basket-shopping"></i>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mb-2">Your cart is empty</h2>
+            <p class="text-slate-500 text-xs sm:text-sm max-w-md mx-auto mb-8">
+                Looks like you haven't added any items to your shopping bag yet. Explore our verified marketplace products and find your next favorite tech.
+            </p>
+            <a
+                href="/shop"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5"
+            >
+                <i class="fa-solid fa-bag-shopping text-xs"></i>
+                <span>Explore Catalog</span>
+            </a>
+        </div>
+
+        <!-- ACTIVE CART CONTENT STATE (Shown if items exist) -->
+        <div id="cart-content-state" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Left Column: Items List -->
+            <div class="lg:col-span-8 space-y-4">
+                
+                <!-- Subheading Bar -->
+                <div class="flex items-center justify-between px-2 pb-2">
+                    <div class="flex items-center gap-2.5">
+                        <span class="text-sm font-bold text-slate-900">Cart Items</span>
+                        <span id="cart-total-badge" class="px-2.5 py-0.5 rounded-full bg-slate-200/80 text-[11px] font-bold text-slate-700">0 Items</span>
+                    </div>
+
+                    <button
+                        type="button"
+                        onclick="handleClearCart()"
+                        class="text-xs font-semibold text-rose-500 hover:text-rose-700 hover:underline flex items-center gap-1.5 transition-colors"
+                        title="Remove all items"
+                    >
+                        <i class="fa-solid fa-trash-can text-[10px]"></i>
+                        <span>Clear All</span>
+                    </button>
+                </div>
+
+                <!-- Dynamic Items Container -->
+                <div id="cart-items-container" class="space-y-3">
+                    <!-- Populated dynamically by public/js/cart.js -->
+                </div>
+
+                <!-- Trust Badges & Guarantee Strip -->
+                <div class="mt-6 p-5 rounded-2xl bg-white/70 backdrop-blur-sm border border-slate-200/60 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center sm:text-left">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm shrink-0">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <div>
+                            <strong class="text-xs font-bold text-slate-900 block leading-tight">Fast Delivery</strong>
+                            <span class="text-[10px] text-slate-400">Tracked global dispatch</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm shrink-0">
+                            <i class="fa-solid fa-shield-check"></i>
+                        </div>
+                        <div>
+                            <strong class="text-xs font-bold text-slate-900 block leading-tight">Secure Payment</strong>
+                            <span class="text-[10px] text-slate-400">256-bit SSL encrypted</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-sm shrink-0">
+                            <i class="fa-solid fa-rotate-left"></i>
+                        </div>
+                        <div>
+                            <strong class="text-xs font-bold text-slate-900 block leading-tight">30-Day Guarantee</strong>
+                            <span class="text-[10px] text-slate-400">Hassle-free returns</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Order Summary (Sticky Card) -->
+            <div class="lg:col-span-4 sticky top-6">
+                <div class="p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.04)] space-y-6">
+                    
+                    <div class="border-b border-slate-100 pb-4">
+                        <h2 class="text-base font-extrabold text-slate-900 tracking-tight">Order Summary</h2>
+                        <p class="text-[11px] text-slate-400 mt-0.5">Shipping & taxes calculated at checkout</p>
+                    </div>
+
+                    <!-- Financial Line Items -->
+                    <div class="space-y-3 text-xs">
+                        <div class="flex items-center justify-between text-slate-600">
+                            <span>Subtotal</span>
+                            <span id="summary-subtotal" class="font-bold text-slate-900">$0.00</span>
+                        </div>
+
+                        <div class="flex items-center justify-between text-slate-600">
+                            <span class="flex items-center gap-1.5">
+                                <span>Estimated Shipping</span>
+                                <i class="fa-regular fa-circle-question text-slate-300 text-[10px]" title="Free shipping on orders over $150"></i>
+                            </span>
+                            <span id="summary-shipping" class="font-bold text-slate-900">$15.00</span>
+                        </div>
+
+                        <div class="flex items-center justify-between text-slate-600">
+                            <span>Estimated Sales Tax (5%)</span>
+                            <span id="summary-tax" class="font-bold text-slate-900">$0.00</span>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-3 flex items-center justify-between text-sm">
+                            <strong class="font-extrabold text-slate-900">Total</strong>
+                            <strong id="summary-grand-total" class="text-base sm:text-lg font-black text-slate-900">$0.00</strong>
+                        </div>
+                    </div>
+
+                    <!-- Free shipping helper tip -->
+                    <div class="p-3 rounded-2xl bg-amber-50/70 border border-amber-200/50 flex items-center gap-2.5 text-[11px] text-amber-900 font-medium">
+                        <i class="fa-solid fa-gift text-amber-500 text-xs"></i>
+                        <span>Free standard shipping applies on all orders over <strong>$150.00</strong>.</span>
+                    </div>
+
+                    <!-- Checkout Button -->
+                    <button
+                        type="button"
+                        id="checkout-btn"
+                        class="w-full py-3.5 px-6 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        <span>Proceed to Checkout</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+
+                    <!-- Back to Catalog Link -->
+                    <div class="text-center pt-1">
+                        <a href="/shop" class="text-xs font-semibold text-slate-400 hover:text-slate-800 transition-colors">
+                            ← Continue Shopping
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- CHECKOUT SIMULATION MODAL -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 animate-fade-in">
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-md w-full p-6 sm:p-8 space-y-6 relative animate-scale-up">
+            
+            <!-- Close button -->
+            <button
+                type="button"
+                id="close-checkout-modal"
+                class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 flex items-center justify-center transition-colors"
+            >
+                <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="text-center">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mx-auto mb-3">
+                    <i class="fa-solid fa-credit-card"></i>
+                </div>
+                <h3 class="text-lg font-extrabold text-slate-900">Complete Your Order</h3>
+                <p class="text-xs text-slate-400 mt-1">Order Total: <strong id="modal-order-total" class="text-slate-900 font-extrabold">$0.00</strong></p>
+            </div>
+
+            <!-- Quick Form -->
+            <div class="space-y-3.5 text-xs">
+                <div>
+                    <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1 text-[10px]">Full Name</label>
+                    <input type="text" placeholder="e.g. John Doe" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400" />
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1 text-[10px]">Shipping Address</label>
+                    <input type="text" placeholder="123 Market St, City, Country" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400" />
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1 text-[10px]">Payment Method</label>
+                    <select class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 bg-white">
+                        <option>Credit / Debit Card (Stripe Checkout)</option>
+                        <option>PayPal</option>
+                        <option>Cash on Delivery</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-2 pt-2">
+                <button
+                    type="button"
+                    id="confirm-order-btn"
+                    class="w-full py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5"
+                >
+                    <i class="fa-solid fa-lock text-[10px]"></i>
+                    <span>Confirm & Pay Now</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Universal Storefront Footer -->
+    <%- include('partials/footer') %>
+    <%- include('partials/footercdns') %>
+
+    <!-- Cart Page Interactivity Engine -->
+    <script src="/js/cart.js"></script>
+
+</body>
+</html>
+
